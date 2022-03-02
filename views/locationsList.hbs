@@ -1,0 +1,62 @@
+{{> header}}
+<div class="banner banner-blog">
+    <div class="container ">
+        <div class="main-heading">
+            <h1>Our Locations</h1>
+        </div>
+
+    </div>
+</div>
+
+
+
+<div class="recipes-home-body inner-page locationLists">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-lg-12">
+                <div class="recipe-set">
+                    <div class="listing-buttons">
+                        <span class="grid current"><i class="fa fa-th-large"></i></span>
+                        <span class="list "><i class="fa fa-bars"></i></span>
+                    </div>
+                    <h2>Recent Recipes</h2>
+
+                    <div class="recipe-listing listing-grid">
+                        {{#each data}}
+                        <div class="listing">
+                            <div class="image">
+                                <img src="{{#getImageFromPhotoGallery this.photoGallery}}{{/getImageFromPhotoGallery}}"
+                                    alt="image" />
+                            </div>
+                            <div class="detail">
+                                <h4>{{this.name}}</h4>
+                                <p>
+                                    <i class="fa fa-phone" aria-hidden="true"></i>
+                                    {{this.mainPhone}}
+                                </p>
+                                <p>
+                                    <strong>Price range: </strong> {{#generatePriceDollarSigns
+                                    this.priceRange}}{{/generatePriceDollarSigns}}
+                                </p>
+                            </div>
+                        </div>
+                        {{/each}}
+
+
+
+
+
+                        <ul class="page-nav">
+                            <li class="current"><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+{{> footer}}

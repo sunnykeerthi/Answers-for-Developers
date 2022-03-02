@@ -2,9 +2,10 @@ const { provideCore, Matcher } = require("@yext/answers-core");
 const express = require("express");
 const router = express.Router();
 const axios = require("axios");
-const API_KEY = process.env.API_KEY;
-const EXPERIENCE_KEY = process.env.EXPERIENCE_KEY;
-const APP_API_KEY = process.env.APP_API_KEY;
+const API_KEY = process.env.API_KEY || "78cc27973d03a8d8f13ba1f8ec63a2c3";
+const EXPERIENCE_KEY = process.env.EXPERIENCE_KEY || "answers";
+const APP_API_KEY =
+  process.env.APP_API_KEY || "03f5fcf48f0899b133c96b3ba5fae1ef";
 
 const core = provideCore({
   apiKey: API_KEY,
@@ -108,7 +109,7 @@ router.get("/recipeList", async (req, res) => {
   let entityId = req.params.ingredient;
   try {
     const resp = await axios.get(
-      `https://liveapi-sandbox.yext.com/v2/accounts/me/entities?limit=20&api_key=${APP_API_KEY}&v=20220104`
+      `https://liveapi-sandbox.yext.com/v2/accounts/me/entities?limit=20&api_key=${APP_API_KEY}&v=20220104&entityTypes=ce_recipes`
     );
     console.log(JSON.stringify(resp.data.response));
     res.render("recipeList", {
@@ -119,6 +120,34 @@ router.get("/recipeList", async (req, res) => {
   }
 });
 
+router.get("/locationsList", async (req, res) => {
+  let entityId = req.params.ingredient;
+  try {
+    const resp = await axios.get(
+      `https://liveapi-sandbox.yext.com/v2/accounts/me/entities?limit=20&api_key=${APP_API_KEY}&v=20220104&entityTypes=restaurant`
+    );
+    res.render("locationsList", {
+      data: resp.data.response.entities,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+router.get("/locationDetail/:locationId", async (req, res) => {
+  let entityId = req.params.locationId;
+  console.log(entityId);
+  try {
+    const resp = await axios.get(
+      `https://liveapi-sandbox.yext.com/v2/accounts/me/entities/${entityId}?api_key=${APP_API_KEY}&v=20220101`
+    );
+
+    res.render("locationDetail", {
+      data: resp.data.response,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
 router.get("/autocomplete", (req, res) => {
   let searchString = req.query.term;
   console.log(searchString);

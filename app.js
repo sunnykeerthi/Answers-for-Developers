@@ -4,14 +4,20 @@ const expbs = require("express-handlebars");
 const { options } = require("./routes/routes.js");
 const port = process.env.PORT || 3500;
 const routes = require("./routes/routes.js");
-
+var numToDigits = {
+  zero: 0,
+  one: 1,
+  two: 2,
+  three: 3,
+  four: 4,
+  five: 5,
+};
 const hbs = expbs.create({
   extname: ".hbs",
   defaultLayout: "index",
 
   helpers: {
     getFirstImage: (options) => {
-      console.log(JSON.stringify(options));
       return options[0];
     },
     changeDateFormat: (options) => {
@@ -26,11 +32,9 @@ const hbs = expbs.create({
       );
     },
     generateNutritionTable: (options) => {
-      console.log(options.length);
       var genDom = "";
       for (var i = 0; i < options.length; i++) {
         var currStr = options[i].split("(")[0];
-        console.log(currStr);
         if (i % 2 == 0) {
           genDom += '<div class="nutrition-detail">';
         }
@@ -63,8 +67,54 @@ const hbs = expbs.create({
     indexPlusOne: (options) => {
       return options + 1;
     },
+    getImageFromPhotoGallery: (options) => {
+      return options[0].image.url;
+    },
+    listToString: (options) => {
+      return options.join(", ");
+    },
+    generatePriceDollarSigns: (options) => {
+      var num = numToDigits[options.toLowerCase()];
+      var genDollars = "";
+      for (var i = 0; i < num; i++) {
+        genDollars += '<i class="fa fa-dollar"></i>';
+      }
+      return genDollars;
+    },
+    generateHours: (options) => {
+      var timingsRetuned = unflattenData(options);
+      var res = [];
+      timingsRetuned.forEach((item) => {
+        const keys = Object.keys(item);
+
+        for (var i in keys) {
+          var k = keys[i];
+          console.log(item[k].openIntervals[0].start);
+          res.push({
+            day: k,
+            open: item[k].openIntervals[0].start,
+            close: item[k].openIntervals[0].end,
+          });
+        }
+      });
+      return res;
+    },
   },
 });
+
+unflattenData = (inputData) => {
+  var JS_Obj = inputData;
+  var obj = JS_Obj;
+  var res = [];
+  const keys = Object.keys(obj);
+  for (var i in keys) {
+    var k = keys[i];
+    res.push({ [k]: obj[k] });
+  }
+  console.log(JSON.stringify(res));
+  return res;
+};
+
 /* configure express app */
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

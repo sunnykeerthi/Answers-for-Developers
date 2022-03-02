@@ -6632,3 +6632,22 @@ div.widget-measurements .default-btn {
 .slick-initialized .slick-slide{ 
   background: repeating-linear-gradient( -55deg, grey, grey 10px, lightgrey 10px, lightgrey 20px );
 }
+
+.locationLists p{
+  display: block !important;
+}
+
+.locationDetail{
+  background: #f8f6f5;
+  padding-top: 85px;
+  padding-bottom: 85px;
+}
+
+.locationDetail .slider-detail2 img{
+  width: 100% !important;
+}
+
+.fa-dollar {
+  color: green;
+  font-size: 14px;
+}
