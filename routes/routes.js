@@ -1,0 +1,180 @@
+const { provideCore, Matcher } = require("@yext/answers-core");
+const express = require("express");
+const router = express.Router();
+const axios = require("axios");
+const API_KEY = process.env.API_KEY;
+const EXPERIENCE_KEY = process.env.EXPERIENCE_KEY;
+const APP_API_KEY = process.env.APP_API_KEY;
+
+const core = provideCore({
+  apiKey: API_KEY,
+  experienceKey: EXPERIENCE_KEY,
+  locale: "en",
+  experienceVersion: "STAGING",
+  endpoints: {
+    universalSearch:
+      "https://liveapi-sandbox.yext.com/v2/accounts/me/answers/query",
+    verticalSearch:
+      "https://liveapi-sandbox.yext.com/v2/accounts/me/answers/vertical/query",
+    questionSubmission:
+      "https://liveapi-sandbox.yext.com/v2/accounts/me/createQuestion",
+    status: "https://answersstatus.pagescdn.com",
+    universalAutocomplete:
+      "https://liveapi-sandbox.yext.com/v2/accounts/me/answers/autocomplete",
+    verticalAutocomplete:
+      "https://liveapi-sandbox.yext.com/v2/accounts/me/answers/vertical/autocomplete",
+    filterSearch:
+      "https://liveapi-sandbox.yext.com/v2/accounts/me/answers/filtersearch",
+  },
+});
+
+router.get("/", (req, res) => {
+  getAllRecipes = async () => {
+    try {
+      const resp = await axios.get(
+        `https://liveapi-sandbox.yext.com/v2/accounts/me/entities?limit=20&api_key=${APP_API_KEY}&v=20220101&entityTypes=ce_recipes&filter={ "$or": [{ "c_featured": { "$eq": true } }, { "c_carousel": { "$eq": true } }, { "c_latestNews": { "$eq": true } }] }`
+      );
+
+      let carouselList = [];
+      let featuresList = [];
+      let latest = [];
+      resp.data.response.entities.forEach((item) => {
+        if (item.c_carousel) {
+          (item.banImage = item.photoGallery[0].image.url),
+            carouselList.push(item);
+        }
+        if (item.c_featured) featuresList.push(item);
+        if (item.c_latestNews) latest.push(item);
+      });
+
+      const ratingResp = await axios.get(
+        `https://liveapi-sandbox.yext.com/v2/accounts/me/entities?limit=10&api_key=${APP_API_KEY}&v=20220101&entityTypes=ce_recipes&sortBy=[{"c_ratingNum":"DESCENDING"}]`
+      );
+      var data = {
+        carouselList: carouselList,
+        featuresList: featuresList,
+        latest: latest,
+        mostRated: ratingResp.data.response.entities.slice(0, 3),
+        mostPopular: ratingResp.data.response.entities.slice(3, 6),
+        random: ratingResp.data.response.entities.slice(7, 10),
+      };
+      res.render("main", {
+        data: data,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  getAllRecipes();
+});
+
+router.get("/recipeDetail/:recipeId", async (req, res) => {
+  let entityId = req.params.recipeId;
+  try {
+    const resp = await axios.get(
+      `https://liveapi-sandbox.yext.com/v2/accounts/me/entities/${entityId}?api_key=${APP_API_KEY}&v=20220101`
+    );
+
+    const streamsResponse = await axios.get(
+      `https://streams-sbx.yext.com/v2/accounts/2700247/api/recipesandrestaurants?api_key=${APP_API_KEY}&v=20200408&id=11103893`
+    );
+    console.log(JSON.stringify(resp.data.response));
+    res.render("recipeDetail", {
+      data: resp.data.response,
+      streamsData: streamsResponse.data.response.docs[0].c_availableAt,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+router.get("/recipeList/:ingredient", async (req, res) => {
+  let entityId = req.params.ingredient;
+  try {
+    const resp = await axios.get(
+      `https://liveapi-sandbox.yext.com/v2/accounts/me/entities?limit=20&api_key=${APP_API_KEY}&v=20220104&filter={ 'c_ingredients':{ '$contains':"${entityId}"}}`
+    );
+
+    res.render("/recipeList", {
+      data: resp.data.response,
+      streamsData: streamsResponse.data.response.docs[0].c_availableAt,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+router.get("/recipeList", async (req, res) => {
+  let entityId = req.params.ingredient;
+  try {
+    const resp = await axios.get(
+      `https://liveapi-sandbox.yext.com/v2/accounts/me/entities?limit=20&api_key=${APP_API_KEY}&v=20220104`
+    );
+    console.log(JSON.stringify(resp.data.response));
+    res.render("recipeList", {
+      data: resp.data.response.entities,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+router.get("/autocomplete", (req, res) => {
+  let searchString = req.query.term;
+  console.log(searchString);
+  core
+    .verticalAutocomplete({
+      verticalKey: "recipes",
+      input: searchString,
+    })
+    .then((result) => res.json(result))
+    .catch((err) => console.log(err));
+});
+
+router.post("/recipePost", async (req, res) => {
+  var body = req.body;
+  var data = JSON.stringify({
+    meta: {
+      id: Array.from(Array(20), () =>
+        Math.floor(Math.random() * 36).toString(36)
+      ).join(""),
+    },
+    name: body.name,
+    datePosted: new Date().toISOString().split("T")[0],
+    c_ingredients: createArrayFromString(body.ingredients),
+    c_images: createArrayFromString(body.images),
+    c_preparationTime: body.preparationTime,
+    c_serves: body.serves,
+    c_author: body.author,
+    c_nutrition: createArrayFromString(body.nutrition),
+    c_cuisine: body.cuisine,
+    c_course: body.course,
+    c_totalIngredients: createArrayFromString(body.totalIngredients),
+    richTextDescription: body.description,
+  });
+
+  var config = {
+    method: "post",
+    url: `https://api-sandbox.yext.com/v2/accounts/me/entities?api_key=${APP_API_KEY}&v=20220101&entityType=ce_recipes&format=html`,
+    header: {
+      "Content-Type": "application/json",
+    },
+    data: data,
+  };
+
+  try {
+    var resData = await axios(config);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+createArrayFromString = (data) => {
+  var retArray = [];
+  data.includes(",")
+    ? data.split(",").forEach((item) => retArray.push(item))
+    : retArray.push(data);
+  return retArray;
+};
+
+module.exports = router;

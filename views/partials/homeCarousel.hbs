@@ -1,0 +1,28 @@
+<section class="wrapper-home-slider variation-two">
+    <div class="fluid-slider-var2">
+        {{#each data.carouselList}}
+        <div>
+
+            <img src="{{this.banImage}}" alt="" />
+
+            <div class="container custom-container-slide">
+                <div class="slide-detail text-center">
+                    <div class="slide-detail-inner">
+                        <h2><a href="#">{{this.name}}</a></h2>
+
+                        <div class="short-separator"></div>
+                        <div class="rating-box">
+                            <br>
+                            <span class="rating-figure">(4.1 / 5)</span>
+                        </div>
+                        <p>
+                            {{this.richTextDescription}}
+                        </p>
+                        <a class="read-more-bordered" href="#">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</section>

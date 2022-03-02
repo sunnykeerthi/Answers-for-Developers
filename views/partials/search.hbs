@@ -1,0 +1,37 @@
+<div class="fluid-search-slider">
+    <!--search bar-->
+    <div class="wrapper-search-bar">
+        <div class="container">
+            <div class="search-bar">
+                <div class="row">
+                    <div class="col-lg-4 col-md-5">
+                        <div class="search-box">
+                            <form action="/search">
+                                <div class="slider-search-left">
+                                    <input type="search" name="search" id="search" placeholder="keyword">
+                                    <button type="submit" id="submitRecipes"><i class="fa fa-search"></i></button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--search bar ends-->
+</div>
+
+<script src="/js/jquery-1.11.3.min.js"></script>
+<script>
+    $(function () {
+        $("#search").autocomplete({
+            source: function (req, res) {
+                fetch("/autocomplete/?term=" + req.term, { type: "Get", dataType: "json" })
+                    .then(response => response.json())
+                    .then(data => res(data.results))
+                    .catch(err => console.log(err));
+            }
+        })
+    })
+</script>

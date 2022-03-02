@@ -1,0 +1,332 @@
+{{> header}}
+
+<div class="banner banner-blog">
+    <div class="container ">
+        <div class="main-heading">
+            <h1>Recipe details page</h1>
+        </div>
+
+    </div>
+</div>
+<div class="advance-search">
+    <!--advance search form-->
+
+    <div class="container">
+        <div class="wrapper-search">
+            <div class="container-tags">
+                <span class="tag">
+                    <span class="tag-inner">Find Recipes <i class="fa fa-angle-down"></i></span>
+                </span>
+
+            </div>
+            <div class="outer-advance-search">
+
+                <form action="#" id="advance-search">
+                    <fieldset>
+                        <div class="inner-advance-search">
+
+                            <div class="form-field">
+                                <label for="ingredient">ingredient</label>
+                                <select name="ingredient" id="ingredient" class="advance-selectable">
+                                    <option value="ing1" selected="selected">Any Ingredient</option>
+                                    <option value="ing2">Butter</option>
+                                    <option value="ing3">Cheese</option>
+                                    <option value="ing4">Cream</option>
+                                    <option value="ing5">Yeast</option>
+                                </select>
+                            </div>
+
+                            <div class="form-field">
+                                <label for="course">course</label>
+                                <select name="course" id="course" class="advance-selectable">
+                                    <option value="ing1" selected="selected">Any Course</option>
+                                    <option value="ing2">Butter</option>
+                                    <option value="ing3">Cheese</option>
+                                    <option value="ing4">Cream</option>
+                                    <option value="ing5">Yeast</option>
+                                </select>
+                            </div>
+
+                            <div class="form-field">
+                                <label for="cuisine">cuisine</label>
+                                <select name="cuisine" id="cuisine" class="advance-selectable">
+                                    <option value="ing1" selected="selected">Any Cuisine</option>
+                                    <option value="ing2">Butter</option>
+                                    <option value="ing3">Cheese</option>
+                                    <option value="ing4">Cream</option>
+                                    <option value="ing5">Yeast</option>
+                                </select>
+                            </div>
+
+                            <div class="form-field">
+                                <label for="time">Cooking Time</label>
+                                <select name="time" id="time" class="advance-selectable">
+                                    <option value="ing1" selected="selected">Any Cooking Time</option>
+                                    <option value="ing2">Butter</option>
+                                    <option value="ing3">Cheese</option>
+                                    <option value="ing4">Cream</option>
+                                    <option value="ing5">Yeast</option>
+                                </select>
+                            </div>
+
+                            <div class="form-field">
+                                <label for="calories">calories</label>
+                                <select name="calories" id="calories" class="advance-selectable">
+                                    <option value="ing1" selected="selected">Any Calories</option>
+                                    <option value="ing2">Butter</option>
+                                    <option value="ing3">Cheese</option>
+                                    <option value="ing4">Cream</option>
+                                    <option value="ing5">Yeast</option>
+                                </select>
+                            </div>
+
+                            <button type="submit"><i class="fa fa-search"></i></button>
+
+                        </div>
+                    </fieldset>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!--advance search form ends-->
+</div>
+
+
+<div class="recipes-home-body inner-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-lg-12">
+                <div class="recipe-set ">
+                    <div class="wrapper-detail-contents detail-2">
+                        <div class="single-recipe-detail">
+                            <div class="wrapper-recipe-heading">
+                                <div class="heading">
+                                    <h2>{{data.name}}</h2>
+
+                                </div>
+
+                            </div>
+
+                            <div class="slider-recipe-detail2">
+                                <div class="wrapper-slider-detail">
+                                    <div class="recipe-slider">
+                                        <div class="slider-detail2">
+                                            {{#each data.c_images}}
+                                            <div> <img src="{{this}}" alt="slide" />
+                                            </div>
+                                            {{/each}}
+                                        </div>
+                                        <span class="custom-arrows wider">
+                                            <span class="left-arrow slick-arrow" data-direction="prev"
+                                                style="display: table-cell;"><i class="fa fa-arrow-left"></i></span>
+                                            <span class="right-arrow slick-arrow" data-direction="next"
+                                                style="display: table-cell;"><i class="fa fa-arrow-right"></i></span>
+                                        </span>
+                                    </div>
+
+                                    <ul class="recipe-specs-2">
+                                        <li><span>Yield : </span>5 Grills</li>
+                                        <li><span>Servings : </span>{{data.c_serves}}</li>
+                                        <li><span>Prep Time : </span>{{data.c_prepTime}}m</li>
+                                        <li><span>Cook Time : </span>40m</li>
+                                        <li><span>Ready In : </span>1:40h</li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <div class="recipe-detail-body">
+                            <div class="rating-box">
+                                <span class="rating-icons"><svg class="icon-container" width="25" height="19"
+                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 19">
+
+                                        <g>
+                                            <title>background</title>
+                                            <rect fill="none" height="21" width="27" y="-1" x="-1" />
+                                        </g>
+                                        <g>
+                                            <title>Layer 1</title>
+                                            <path class="icon-svg"
+                                                d="m24.671816,17.625433c0,0.438 -0.286999,0.801001 -0.681,0.935001c-0.095001,0.036999 -0.198002,0.064999 -0.318001,0.064999l-16.000998,0c-0.553,0 -1,-0.448 -1,-1c0,-0.553999 0.447,-1 1,-1l14.950999,0c-0.500999,-5.053999 -4.764997,-9 -9.950999,-9c-5.523,0 -10,4.477001 -10,10c0,0 0.063,1 -1,1c-1.062,0 -1,-1 -1,-1c0,-5.769999 4.071,-10.581999 9.495001,-11.734999c-0.306002,-0.52 -0.495001,-1.117001 -0.495001,-1.765001c0,-1.933999 1.566999,-3.499999 3.5,-3.499999c1.931999,0 3.499,1.567 3.499,3.499999c0,0.739 -0.232998,1.423 -0.624998,1.989c4.984999,1.459 8.625998,6.056 8.625998,11.511l0,0zm-11.499,-15c-0.828999,0 -1.500999,0.670001 -1.500999,1.499001c0,0.827999 0.672001,1.5 1.500999,1.5c0.828001,0 1.499001,-0.672001 1.499001,-1.5c0,-0.829 -0.671,-1.499001 -1.499001,-1.499001l0,0z"
+                                                clip-rule="evenodd" fill-rule="evenodd" />
+                                        </g>
+                                    </svg></span>
+                                <span class="rating-icons"><svg class="icon-container" width="25" height="19"
+                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 19">
+
+                                        <g>
+                                            <title>background</title>
+                                            <rect fill="none" height="21" width="27" y="-1" x="-1" />
+                                        </g>
+                                        <g>
+                                            <title>Layer 1</title>
+                                            <path class="icon-svg"
+                                                d="m24.671816,17.625433c0,0.438 -0.286999,0.801001 -0.681,0.935001c-0.095001,0.036999 -0.198002,0.064999 -0.318001,0.064999l-16.000998,0c-0.553,0 -1,-0.448 -1,-1c0,-0.553999 0.447,-1 1,-1l14.950999,0c-0.500999,-5.053999 -4.764997,-9 -9.950999,-9c-5.523,0 -10,4.477001 -10,10c0,0 0.063,1 -1,1c-1.062,0 -1,-1 -1,-1c0,-5.769999 4.071,-10.581999 9.495001,-11.734999c-0.306002,-0.52 -0.495001,-1.117001 -0.495001,-1.765001c0,-1.933999 1.566999,-3.499999 3.5,-3.499999c1.931999,0 3.499,1.567 3.499,3.499999c0,0.739 -0.232998,1.423 -0.624998,1.989c4.984999,1.459 8.625998,6.056 8.625998,11.511l0,0zm-11.499,-15c-0.828999,0 -1.500999,0.670001 -1.500999,1.499001c0,0.827999 0.672001,1.5 1.500999,1.5c0.828001,0 1.499001,-0.672001 1.499001,-1.5c0,-0.829 -0.671,-1.499001 -1.499001,-1.499001l0,0z"
+                                                clip-rule="evenodd" fill-rule="evenodd" />
+                                        </g>
+                                    </svg></span>
+                                <span class="rating-icons"><svg class="icon-container" width="25" height="19"
+                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 19">
+
+                                        <g>
+                                            <title>background</title>
+                                            <rect fill="none" height="21" width="27" y="-1" x="-1" />
+                                        </g>
+                                        <g>
+                                            <title>Layer 1</title>
+                                            <path class="icon-svg"
+                                                d="m24.671816,17.625433c0,0.438 -0.286999,0.801001 -0.681,0.935001c-0.095001,0.036999 -0.198002,0.064999 -0.318001,0.064999l-16.000998,0c-0.553,0 -1,-0.448 -1,-1c0,-0.553999 0.447,-1 1,-1l14.950999,0c-0.500999,-5.053999 -4.764997,-9 -9.950999,-9c-5.523,0 -10,4.477001 -10,10c0,0 0.063,1 -1,1c-1.062,0 -1,-1 -1,-1c0,-5.769999 4.071,-10.581999 9.495001,-11.734999c-0.306002,-0.52 -0.495001,-1.117001 -0.495001,-1.765001c0,-1.933999 1.566999,-3.499999 3.5,-3.499999c1.931999,0 3.499,1.567 3.499,3.499999c0,0.739 -0.232998,1.423 -0.624998,1.989c4.984999,1.459 8.625998,6.056 8.625998,11.511l0,0zm-11.499,-15c-0.828999,0 -1.500999,0.670001 -1.500999,1.499001c0,0.827999 0.672001,1.5 1.500999,1.5c0.828001,0 1.499001,-0.672001 1.499001,-1.5c0,-0.829 -0.671,-1.499001 -1.499001,-1.499001l0,0z"
+                                                clip-rule="evenodd" fill-rule="evenodd" />
+                                        </g>
+                                    </svg></span>
+                                <span class="rating-icons"><svg class="icon-container" width="25" height="19"
+                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 19">
+
+                                        <g>
+                                            <title>background</title>
+                                            <rect fill="none" height="21" width="27" y="-1" x="-1" />
+                                        </g>
+                                        <g>
+                                            <title>Layer 1</title>
+                                            <path class="icon-svg"
+                                                d="m24.671816,17.625433c0,0.438 -0.286999,0.801001 -0.681,0.935001c-0.095001,0.036999 -0.198002,0.064999 -0.318001,0.064999l-16.000998,0c-0.553,0 -1,-0.448 -1,-1c0,-0.553999 0.447,-1 1,-1l14.950999,0c-0.500999,-5.053999 -4.764997,-9 -9.950999,-9c-5.523,0 -10,4.477001 -10,10c0,0 0.063,1 -1,1c-1.062,0 -1,-1 -1,-1c0,-5.769999 4.071,-10.581999 9.495001,-11.734999c-0.306002,-0.52 -0.495001,-1.117001 -0.495001,-1.765001c0,-1.933999 1.566999,-3.499999 3.5,-3.499999c1.931999,0 3.499,1.567 3.499,3.499999c0,0.739 -0.232998,1.423 -0.624998,1.989c4.984999,1.459 8.625998,6.056 8.625998,11.511l0,0zm-11.499,-15c-0.828999,0 -1.500999,0.670001 -1.500999,1.499001c0,0.827999 0.672001,1.5 1.500999,1.5c0.828001,0 1.499001,-0.672001 1.499001,-1.5c0,-0.829 -0.671,-1.499001 -1.499001,-1.499001l0,0z"
+                                                clip-rule="evenodd" fill-rule="evenodd" />
+                                        </g>
+                                    </svg></span>
+                                <span class="rating-icons"><svg class="icon-container" width="25" height="19"
+                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 19">
+
+                                        <g>
+                                            <title>background</title>
+                                            <rect fill="none" height="21" width="27" y="-1" x="-1" />
+                                        </g>
+                                        <g>
+                                            <title>Layer 1</title>
+                                            <path class="icon-svg"
+                                                d="m24.671816,17.625433c0,0.438 -0.286999,0.801001 -0.681,0.935001c-0.095001,0.036999 -0.198002,0.064999 -0.318001,0.064999l-16.000998,0c-0.553,0 -1,-0.448 -1,-1c0,-0.553999 0.447,-1 1,-1l14.950999,0c-0.500999,-5.053999 -4.764997,-9 -9.950999,-9c-5.523,0 -10,4.477001 -10,10c0,0 0.063,1 -1,1c-1.062,0 -1,-1 -1,-1c0,-5.769999 4.071,-10.581999 9.495001,-11.734999c-0.306002,-0.52 -0.495001,-1.117001 -0.495001,-1.765001c0,-1.933999 1.566999,-3.499999 3.5,-3.499999c1.931999,0 3.499,1.567 3.499,3.499999c0,0.739 -0.232998,1.423 -0.624998,1.989c4.984999,1.459 8.625998,6.056 8.625998,11.511l0,0zm-11.499,-15c-0.828999,0 -1.500999,0.670001 -1.500999,1.499001c0,0.827999 0.672001,1.5 1.500999,1.5c0.828001,0 1.499001,-0.672001 1.499001,-1.5c0,-0.829 -0.671,-1.499001 -1.499001,-1.499001l0,0z"
+                                                clip-rule="evenodd" fill-rule="evenodd" />
+                                        </g>
+                                    </svg></span>
+                                <span class="rating-figure">(4.1 / 5)</span>
+                            </div>
+                            <ul class="pre-tags">
+                                <li><span>Cuisine : </span>{{data.c_cuisine}}</li>
+                                <li><span>Course : </span>{{data.c_course}}</li>
+                                <li><span>Skill Level : </span>Advanced</li>
+                            </ul>
+                            <div class="separator-post"></div>
+                            <p>
+                                {{data.richTextDescription}}
+                            </p>
+                            <br />
+                            <div class="ingredients-checkbox">
+                                <div class="ingredients">
+                                    <h3>Ingredients</h3>
+                                    <ul>
+                                        {{#each data.c_totalIngredients}}
+                                        <li>
+                                            <label>
+                                                <input type="checkbox" />
+                                                {{this}}
+                                            </label>
+                                        </li>
+                                        {{/each}}
+                                    </ul>
+                                </div>
+                                <div class="nutritional">
+                                    <h3>Nutritional</h3>
+                                    {{#generateNutritionTable data.c_nutrition}}
+                                    {{/generateNutritionTable}}
+                                </div>
+                            </div>
+
+                            <div class="recipe-steps">
+                                <h3 class="lined">Step by Step method</h3>
+                                {{#each data.c_instructions}}
+                                <i>Step {{#indexPlusOne @index}}{{/indexPlusOne}}: </i>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <p>
+                                            {{this}}
+                                        </p>
+                                    </div>
+                                </div>
+                                {{/each}}
+                            </div>
+
+
+                            <div class="tips-variations">
+                                <h3>Tips & variations</h3>
+                                <ul>
+                                    <li>
+                                        <p>
+                                            Rinse the chicken pieces in cold water and pat dry. Place the chicken in
+                                            a large, resealable zip-top bag
+                                            and pour in the marinade. Toss the chicken inside the bag to cover.
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p>
+                                            Rinse the chicken pieces in cold water and pat dry. Place the chicken in
+                                            a large, resealable zip-top bag
+                                            and pour in the marinade.
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p>
+                                            Rinse the chicken pieces in cold water and pat dry. Place the chicken in
+                                            a large, resealable zip-top bag
+                                            and pour in the marinade. Toss the chicken inside the bag to cover.
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="separator-post"></div>
+                            <div class="tags-icons">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="details-tags">
+                                            <ul>
+                                                {{#each data.c_ingredients}}
+                                                <li><a href="#">{{this}}</a></li>
+                                                {{/each}}
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="comment-form">
+                            <h3 class="lined">Leave Comment</h3>
+
+                            <form action="#" method="post">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <input type="text" name="name" placeholder="Name" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="email" name="email" placeholder="Email" />
+                                    </div>
+                                </div>
+                                <textarea name="comment" id="comment" cols="30" rows="10"
+                                    placeholder="Message"></textarea>
+                                <button class="submit-comment">Submit</button>
+                            </form>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+{{> footer}}
