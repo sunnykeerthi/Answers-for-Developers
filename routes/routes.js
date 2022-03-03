@@ -78,7 +78,6 @@ router.get("/recipeDetail/:recipeId", async (req, res) => {
     const streamsResponse = await axios.get(
       `https://streams-sbx.yext.com/v2/accounts/2700247/api/recipesandrestaurants?api_key=${APP_API_KEY}&v=20200408&id=11103893`
     );
-    console.log(JSON.stringify(resp.data.response));
     res.render("recipeDetail", {
       data: resp.data.response,
       streamsData: streamsResponse.data.response.docs[0].c_availableAt,
@@ -110,7 +109,6 @@ router.get("/recipeList", async (req, res) => {
     const resp = await axios.get(
       `https://liveapi-sandbox.yext.com/v2/accounts/me/entities?limit=20&api_key=${APP_API_KEY}&v=20220104&entityTypes=ce_recipes`
     );
-    console.log(JSON.stringify(resp.data.response));
     res.render("recipeList", {
       data: resp.data.response.entities,
     });
@@ -134,7 +132,6 @@ router.get("/locationsList", async (req, res) => {
 });
 router.get("/locationDetail/:locationId", async (req, res) => {
   let entityId = req.params.locationId;
-  console.log(entityId);
   try {
     const resp = await axios.get(
       `https://liveapi-sandbox.yext.com/v2/accounts/me/entities/${entityId}?api_key=${APP_API_KEY}&v=20220101`
@@ -148,7 +145,6 @@ router.get("/locationDetail/:locationId", async (req, res) => {
 });
 router.get("/autocomplete", (req, res) => {
   let searchString = req.query.term;
-  console.log(searchString);
   core
     .verticalAutocomplete({
       verticalKey: "recipes",
