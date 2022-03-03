@@ -6651,3 +6651,7 @@ div.widget-measurements .default-btn {
   color: green;
   font-size: 14px;
 }
+
+.hrs li{
+  text-transform: capitalize;
+}

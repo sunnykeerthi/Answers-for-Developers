@@ -12,6 +12,7 @@ var numToDigits = {
   four: 4,
   five: 5,
 };
+
 const hbs = expbs.create({
   extname: ".hbs",
   defaultLayout: "index",
@@ -82,14 +83,13 @@ const hbs = expbs.create({
       return genDollars;
     },
     generateHours: (options) => {
-      var timingsRetuned = unflattenData(options);
+      var timingsRetuned = unflattenHoursData(options);
       var res = [];
       timingsRetuned.forEach((item) => {
         const keys = Object.keys(item);
 
         for (var i in keys) {
           var k = keys[i];
-          console.log(item[k].openIntervals[0].start);
           res.push({
             day: k,
             open: item[k].openIntervals[0].start,
@@ -102,7 +102,7 @@ const hbs = expbs.create({
   },
 });
 
-unflattenData = (inputData) => {
+unflattenHoursData = (inputData) => {
   var JS_Obj = inputData;
   var obj = JS_Obj;
   var res = [];
@@ -111,7 +111,6 @@ unflattenData = (inputData) => {
     var k = keys[i];
     res.push({ [k]: obj[k] });
   }
-  console.log(JSON.stringify(res));
   return res;
 };
 
