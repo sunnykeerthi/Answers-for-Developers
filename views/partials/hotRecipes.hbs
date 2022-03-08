@@ -26,17 +26,16 @@
                     <div class="split-images-var2 col-size text-center">
                         <div class="image-first inner-split">
                             <div class="image common-split animated wow flipInY animation-delay100ms">
-                                <a href="#"><img src="{{#getFirstImage this.c_images}}{{/getFirstImage}}"
-                                        alt="image" /></a>
+                                <img src="{{#getFirstImage this.c_images}}{{/getFirstImage}}" alt="image" />
                             </div>
                             <div class="intro common-split animated wow flipInY animation-delay200ms">
                                 <div class="intro-inner ">
                                     <h3><a href="/recipeDetail/{{this.meta.id}}">{{this.name}}</a></h3>
                                     <div class="short-separator"></div>
                                     <p>
-                                       {{this.richTextDescription}}
+                                        {{this.richTextDescription}}
                                     </p>
-                                    <a class="read-more" href="#">read more</a>
+                                    <a class="read-more" href="/recipeDetail/{{this.meta.id}}">read more</a>
                                 </div>
                             </div>
                         </div>
