@@ -4,7 +4,8 @@ const router = express.Router();
 const axios = require("axios");
 const API_KEY = process.env.API_KEY;
 const EXPERIENCE_KEY = process.env.EXPERIENCE_KEY;
-const APP_API_KEY = process.env.APP_API_KEY;
+const APP_API_KEY =
+  process.env.APP_API_KEY;
 
 const core = provideCore({
   apiKey: API_KEY,
@@ -76,9 +77,9 @@ router.get("/recipeDetail/:recipeId", async (req, res) => {
     );
 
     const streamsResponse = await axios.get(
-      `https://streams-sbx.yext.com/v2/accounts/2700247/api/recipesandrestaurants?api_key=${APP_API_KEY}&v=20200408&id=11103893`
+      `https://streams-sbx.yext.com/v2/accounts/me/api/recipesandrestaurants?api_key=${APP_API_KEY}&v=20200408&id=11103893`
     );
-    res.render("recipeDetail", {
+     res.render("recipeDetail", {
       data: resp.data.response,
       streamsData: streamsResponse.data.response.docs[0].c_availableAt,
     });
@@ -105,20 +106,6 @@ router.get("/recipeList/:ingredient?", async (req, res) => {
     console.log(err);
   }
 });
-
-// router.get("/recipeList", async (req, res) => {
-//   let entityId = req.params.ingredient;
-//   try {
-//     const resp = await axios.get(
-//       `https://liveapi-sandbox.yext.com/v2/accounts/me/entities?limit=20&api_key=${APP_API_KEY}&v=20220104&entityTypes=ce_recipes`
-//     );
-//     res.render("recipeList", {
-//       data: resp.data.response.entities,
-//     });
-//   } catch (err) {
-//     console.log(err);
-//   }
-// });
 
 router.get("/locationsList", async (req, res) => {
   let entityId = req.params.ingredient;
@@ -147,6 +134,7 @@ router.get("/locationDetail/:locationId", async (req, res) => {
     console.log(err);
   }
 });
+
 router.get("/autocomplete", (req, res) => {
   let searchString = req.query.term;
   core
@@ -156,6 +144,21 @@ router.get("/autocomplete", (req, res) => {
     })
     .then((result) => res.json(result))
     .catch((err) => console.log(err));
+});
+
+router.get("/search", async (req, res) => {
+  const searchTerm = req.query;
+   core
+    .verticalSearch({
+      verticalKey: "recipes",
+      query: searchTerm.search,
+    })
+    .then((resp) => {
+      res.render("searchResult", {
+        title: `Found ${resp.verticalResults.results.length} Recipes`,
+        data: resp.verticalResults.results,
+      });
+    });
 });
 
 router.post("/recipePost", async (req, res) => {

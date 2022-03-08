@@ -12,8 +12,27 @@
 
                         <div class="short-separator"></div>
                         <div class="rating-box">
-                            <br>
-                            <span class="rating-figure">(4.1 / 5)</span>
+                            {{#if this.c_ratingNum}}
+                            <div class="star-rating">
+                                <div class="back-stars">
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+
+                                    <div class="front-stars"
+                                        style="width: {{#getRatingPercentage this.c_ratingNum}}{{/getRatingPercentage}}%">
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                                <span class="rating-figure">({{this.c_ratingNum}}/ 5)</span>
+                            </div>
+                            {{/if}}
                         </div>
                         <p>
                             {{this.richTextDescription}}

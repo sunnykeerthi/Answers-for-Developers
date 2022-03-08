@@ -6630,7 +6630,7 @@ div.widget-measurements .default-btn {
   margin-right: auto;
 }
 .slick-initialized .slick-slide{ 
-  background: repeating-linear-gradient( -55deg, grey, grey 10px, lightgrey 10px, lightgrey 20px );
+  background: repeating-linear-gradient( -55deg, green, green 5px, lightgreen 5px, lightgreen 6px );
 }
 
 .locationLists p{
@@ -6654,4 +6654,111 @@ div.widget-measurements .default-btn {
 
 .hrs li{
   text-transform: capitalize;
+}
+
+/*Star rating*/
+.font-awesome {
+  font-family: FontAwesome;
+  display: inline-block;
+}
+
+.rating-figure {
+  margin-left: 0.5em;
+}
+
+.font-awesome-positioned {
+  font-family: FontAwesome;
+  display: inline-block;
+  position: absolute;
+  left: 0;
+}
+
+.front-stars,
+.back-stars,
+.star-rating {
+  display: flex;
+}
+
+.star-rating {
+  align-items: center;
+  font-size: 1.35em;
+  justify-content: center;
+ }
+
+.star-rating .fa {
+  margin-left: 0.5em;
+}
+
+.back-stars {
+  color: white; /* background Color*/
+  position: relative;
+  text-shadow: 0 0 1px black;
+}
+
+.fa {
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: transparent; /* border color*/
+}
+
+.front-stars {
+  color: yellowgreen; /* fill color*/
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  transition: all 0.5s;
+} 
+.listing-grid .listing .detail h4{
+  height: 7em;
+}
+.listing-grid .listing .detail .meta-listing {
+   height: 5em;
+}
+
+.searchResult .listing .detail{
+  display: block !important;
+}
+
+.ui-autocomplete {
+  width: 27.75% !important;
+  background: white;
+}
+
+li.ui-menu-item {
+  border: 1px solid lightgrey; 
+  padding: 0.15em; 
+}
+
+.slider-search-left{
+  font-size: 1.5em !important;
+}
+
+.searchBarStyles{
+  width: 82%;
+}
+.searchBarStyles #search{
+  width: 90%;
+}
+
+
+.variation-two .slide-detail-inner .rating-box .rating-figure {
+   margin-top: 0px !important;
+  margin-left: 13px !important;
+}
+
+.variation-two .rating-box .rating-figure {
+   padding-top: 0px !important;
+}
+#locationsCarousel .slick-slide img{
+  width: 250px;
+  height: 200px;
+  margin-left: auto  !important;
+  margin-right: auto !important;
+}
+
+#locationsCarousel .slick-slide {
+  background: white !important;
+  text-align: center !important;
+}
+.tags-icons .details-tags a{
+text-transform: capitalize;
 }

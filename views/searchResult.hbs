@@ -1,0 +1,43 @@
+{{> header}}
+<div class="banner banner-blog">
+    <div class="container ">
+        <div class="main-heading">
+            <h1>Recipe Results page</h1>
+        </div>
+
+    </div>
+</div>
+
+<div class="recipes-home-body inner-page searchResult">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-lg-12">
+                <div class="recipe-set">
+                    <h2>{{title}}</h2>
+                    <div class="recipe-listing listing-list">
+                        {{#each data}}
+                        <div class="listing">
+                            <div class="image">
+                                <img src="{{#getFirstImage this.rawData.c_images}}{{/getFirstImage}}" alt="image" />
+                            </div>
+                            <div class="detail">
+                                <h4><a href="/recipeDetail/{{this.meta.id}}">{{this.rawData.name}}</a></h4>
+                                <p>
+                                    {{this.rawData.richTextDescription}}
+                                </p>
+                                <a class="read-more-bordered" href="/recipeDetail/{{this.rawData.id}}"
+                                    style="margin-top: 5%;">Learn
+                                    More</a>
+                            </div>
+                        </div>
+                        {{/each}}
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+{{> footer}}

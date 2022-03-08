@@ -99,6 +99,19 @@ const hbs = expbs.create({
       });
       return res;
     },
+    getRatingPercentage: (options) => {
+      return (options / 5) * 100;
+    },
+    getCookTime: (prepTime, cookTime) => {
+      var retVal;
+      prepTime == cookTime
+        ? (retVal = prepTime)
+        : (retVal = cookTime - prepTime);
+      return retVal;
+    },
+    minToHrAndRoundToTwoDecimals: (options) => {
+      return (options / 60).toFixed(2).replace(".", ":");
+    },
   },
 });
 
