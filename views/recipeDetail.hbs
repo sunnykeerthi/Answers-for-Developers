@@ -137,8 +137,6 @@
 
                             </div>
                         </div>
-
-
                         <div class="recipe-detail-body">
                             <div class="rating-box">
                                 <span class="rating-icons"><svg class="icon-container" width="25" height="19"
@@ -243,90 +241,84 @@
                                     {{/generateNutritionTable}}
                                 </div>
                             </div>
-
-                            <div class="recipe-steps">
-                                <h3 class="lined">Step by Step method</h3>
-                                {{#each data.c_instructions}}
-                                <i>Step {{#indexPlusOne @index}}{{/indexPlusOne}}: </i>
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <p>
-                                            {{this}}
-                                        </p>
-                                    </div>
-                                </div>
-                                {{/each}}
-                            </div>
-
-
-                            <div class="tips-variations">
-                                <h3>Tips & variations</h3>
-                                <ul>
-                                    <li>
-                                        <p>
-                                            Rinse the chicken pieces in cold water and pat dry. Place the chicken in
-                                            a large, resealable zip-top bag
-                                            and pour in the marinade. Toss the chicken inside the bag to cover.
-                                        </p>
-                                    </li>
-                                    <li>
-                                        <p>
-                                            Rinse the chicken pieces in cold water and pat dry. Place the chicken in
-                                            a large, resealable zip-top bag
-                                            and pour in the marinade.
-                                        </p>
-                                    </li>
-                                    <li>
-                                        <p>
-                                            Rinse the chicken pieces in cold water and pat dry. Place the chicken in
-                                            a large, resealable zip-top bag
-                                            and pour in the marinade. Toss the chicken inside the bag to cover.
-                                        </p>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <div class="separator-post"></div>
-                            <div class="tags-icons">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="details-tags">
-                                            <ul>
-                                                {{#each data.c_ingredients}}
-                                                <li><a href="#">{{this}}</a></li>
-                                                {{/each}}
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
                         </div>
-                        <div class="comment-form">
-                            <h3 class="lined">Leave Comment</h3>
-
-                            <form action="#" method="post">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <input type="text" name="name" placeholder="Name" />
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input type="email" name="email" placeholder="Email" />
-                                    </div>
+                        <div class="recipe-steps">
+                            <h3 class="lined">Step by Step method</h3>
+                            {{#each data.c_instructions}}
+                            <i>Step {{#indexPlusOne @index}}{{/indexPlusOne}}: </i>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <p>
+                                        {{this}}
+                                    </p>
                                 </div>
-                                <textarea name="comment" id="comment" cols="30" rows="10"
-                                    placeholder="Message"></textarea>
-                                <button class="submit-comment">Submit</button>
-                            </form>
+                            </div>
+                            {{/each}}
                         </div>
 
 
+                        <div class="tips-variations">
+                            <h3>Tips & variations</h3>
+                            <ul>
+                                <li>
+                                    <p>
+                                        Rinse the chicken pieces in cold water and pat dry. Place the chicken in
+                                        a large, resealable zip-top bag
+                                        and pour in the marinade. Toss the chicken inside the bag to cover.
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>
+                                        Rinse the chicken pieces in cold water and pat dry. Place the chicken in
+                                        a large, resealable zip-top bag
+                                        and pour in the marinade.
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>
+                                        Rinse the chicken pieces in cold water and pat dry. Place the chicken in
+                                        a large, resealable zip-top bag
+                                        and pour in the marinade. Toss the chicken inside the bag to cover.
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="separator-post"></div>
+                        <div class="tags-icons">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="details-tags">
+                                        <ul>
+                                            {{#each data.c_ingredients}}
+                                            <li><a href="/recipeList/{{this}}">{{this}}</a></li>
+                                            {{/each}}
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="comment-form">
+                        <h3 class="lined">Leave Comment</h3>
+
+                        <form action="#" method="post">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="text" name="name" placeholder="Name" />
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="email" name="email" placeholder="Email" />
+                                </div>
+                            </div>
+                            <textarea name="comment" id="comment" cols="30" rows="10" placeholder="Message"></textarea>
+                            <button class="submit-comment">Submit</button>
+                        </form>
                     </div>
                 </div>
             </div>
-
         </div>
-
     </div>
 </div>
 {{> footer}}

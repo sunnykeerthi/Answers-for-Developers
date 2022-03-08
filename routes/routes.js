@@ -87,35 +87,38 @@ router.get("/recipeDetail/:recipeId", async (req, res) => {
   }
 });
 
-router.get("/recipeList/:ingredient", async (req, res) => {
-  let entityId = req.params.ingredient;
+router.get("/recipeList/:ingredient?", async (req, res) => {
+  let ingredient = req.params.ingredient;
+  let url;
+  ingredient
+    ? (url = `https://liveapi-sandbox.yext.com/v2/accounts/me/entities?limit=20&api_key=${APP_API_KEY}&v=20220104&filter={ 'c_ingredients':{ '$contains':"${ingredient}"}}`)
+    : (url = `https://liveapi-sandbox.yext.com/v2/accounts/me/entities?limit=20&api_key=${APP_API_KEY}&v=20220104&entityTypes=ce_recipes`);
   try {
-    const resp = await axios.get(
-      `https://liveapi-sandbox.yext.com/v2/accounts/me/entities?limit=20&api_key=${APP_API_KEY}&v=20220104&filter={ 'c_ingredients':{ '$contains':"${entityId}"}}`
-    );
-
-    res.render("/recipeList", {
-      data: resp.data.response,
-      streamsData: streamsResponse.data.response.docs[0].c_availableAt,
-    });
-  } catch (err) {
-    console.log(err);
-  }
-});
-
-router.get("/recipeList", async (req, res) => {
-  let entityId = req.params.ingredient;
-  try {
-    const resp = await axios.get(
-      `https://liveapi-sandbox.yext.com/v2/accounts/me/entities?limit=20&api_key=${APP_API_KEY}&v=20220104&entityTypes=ce_recipes`
-    );
+    const resp = await axios.get(url);
     res.render("recipeList", {
+      title: ingredient
+        ? `Found ${resp.data.response.entities.length} Recipes`
+        : `Recipes List`,
       data: resp.data.response.entities,
     });
   } catch (err) {
     console.log(err);
   }
 });
+
+// router.get("/recipeList", async (req, res) => {
+//   let entityId = req.params.ingredient;
+//   try {
+//     const resp = await axios.get(
+//       `https://liveapi-sandbox.yext.com/v2/accounts/me/entities?limit=20&api_key=${APP_API_KEY}&v=20220104&entityTypes=ce_recipes`
+//     );
+//     res.render("recipeList", {
+//       data: resp.data.response.entities,
+//     });
+//   } catch (err) {
+//     console.log(err);
+//   }
+// });
 
 router.get("/locationsList", async (req, res) => {
   let entityId = req.params.ingredient;
@@ -130,6 +133,7 @@ router.get("/locationsList", async (req, res) => {
     console.log(err);
   }
 });
+
 router.get("/locationDetail/:locationId", async (req, res) => {
   let entityId = req.params.locationId;
   try {

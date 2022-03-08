@@ -101,7 +101,7 @@
                         <span class="grid current"><i class="fa fa-th-large"></i></span>
                         <span class="list "><i class="fa fa-bars"></i></span>
                     </div>
-                    <h2>Recent Recipes</h2>
+                    <h2>{{title}}</h2>
 
                     <div class="recipe-listing listing-grid">
                         {{#each data}}
@@ -110,13 +110,13 @@
                                 <img src="{{#getFirstImage this.c_images}}{{/getFirstImage}}" alt="image" />
                             </div>
                             <div class="detail">
-                                <h4>{{this.name}}</h4>
+                                <h4><a href="/recipeDetail/{{this.meta.id}}">{{this.name}}</a></h4>
                                 <p>
                                     {{this.richTextDescription}}
                                 </p>
                                 <div class="meta-listing">
                                     <ul class="post-meta">
-                                        <li class="author">{{this.c_aurthor}}</li>
+                                        {{#if this.c_aurthor}} <li class="author">{{this.c_aurthor}}</li>{{/if}}
                                         <li class="calendar">{{#changeDateFormat this.datePosted}}{{/changeDateFormat}}
                                         </li>
                                     </ul>
