@@ -6771,3 +6771,11 @@ text-transform: capitalize;
 .custom-row-food-tabs .rating-box .rating-figure {
    padding-top: 0px !important;
 }
+
+.locationLists .listing-grid .listing .detail h4 {
+  height: 0em;
+}
+
+.listing-grid .listing .detail h4 {
+  margin-bottom: 0px;
+}
