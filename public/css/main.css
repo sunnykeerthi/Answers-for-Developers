@@ -6773,9 +6773,9 @@ text-transform: capitalize;
 }
 
 .locationLists .listing-grid .listing .detail h4 {
-  height: 0em;
+  height: 3em;
 }
 
 .listing-grid .listing .detail h4 {
-  margin-bottom: 0px;
+  margin-bottom: 1em;
 }
