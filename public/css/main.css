@@ -6762,3 +6762,12 @@ li.ui-menu-item {
 .tags-icons .details-tags a{
 text-transform: capitalize;
 }
+
+.custom-row-food-tabs .star-rating {
+   justify-content: flex-start !important;
+   font-size: 1.2em !important;
+}
+
+.custom-row-food-tabs .rating-box .rating-figure {
+   padding-top: 0px !important;
+}

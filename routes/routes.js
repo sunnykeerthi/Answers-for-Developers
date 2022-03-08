@@ -4,8 +4,7 @@ const router = express.Router();
 const axios = require("axios");
 const API_KEY = process.env.API_KEY;
 const EXPERIENCE_KEY = process.env.EXPERIENCE_KEY;
-const APP_API_KEY =
-  process.env.APP_API_KEY;
+const APP_API_KEY = process.env.APP_API_KEY;
 
 const core = provideCore({
   apiKey: API_KEY,
@@ -79,7 +78,7 @@ router.get("/recipeDetail/:recipeId", async (req, res) => {
     const streamsResponse = await axios.get(
       `https://streams-sbx.yext.com/v2/accounts/me/api/recipesandrestaurants?api_key=${APP_API_KEY}&v=20200408&id=11103893`
     );
-     res.render("recipeDetail", {
+    res.render("recipeDetail", {
       data: resp.data.response,
       streamsData: streamsResponse.data.response.docs[0].c_availableAt,
     });
@@ -148,7 +147,7 @@ router.get("/autocomplete", (req, res) => {
 
 router.get("/search", async (req, res) => {
   const searchTerm = req.query;
-   core
+  core
     .verticalSearch({
       verticalKey: "recipes",
       query: searchTerm.search,
