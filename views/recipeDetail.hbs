@@ -18,7 +18,7 @@
                         <div class="single-recipe-detail">
                             <div class="wrapper-recipe-heading">
                                 <div class="heading">
-                                    <h2>{{data.name}}</h2>
+                                    <h2>{{recipeData.name}}</h2>
 
                                 </div>
 
@@ -28,7 +28,7 @@
                                 <div class="wrapper-slider-detail">
                                     <div class="recipe-slider">
                                         <div class="slider-detail2">
-                                            {{#each data.c_images}}
+                                            {{#each recipeData.c_images}}
                                             <div> <img src="{{this}}" alt="slide" />
                                             </div>
                                             {{/each}}
@@ -42,13 +42,13 @@
                                     </div>
 
                                     <ul class="recipe-specs-2">
-                                        <li><span>Servings : </span>{{data.c_serves}}</li>
-                                        {{#if data.c_prepTime}} <li><span>Prep Time : </span>{{data.c_prepTime}}m</li>
-                                        <li><span>Cook Time : </span>{{#getCookTime data.c_prepTime
-                                            data.c_totalTime}}{{/getCookTime}}m
+                                        <li><span>Servings : </span>{{recipeData.c_serves}}</li>
+                                        {{#if recipeData.c_prepTime}} <li><span>Prep Time : </span>{{recipeData.c_prepTime}}m</li>
+                                        <li><span>Cook Time : </span>{{#getCookTime recipeData.c_prepTime
+                                            recipeData.c_totalTime}}{{/getCookTime}}m
                                         </li>
                                         <li><span>Ready In : </span>{{#minToHrAndRoundToTwoDecimals
-                                            data.c_totalTime}}{{/minToHrAndRoundToTwoDecimals}}h</li>
+                                            recipeData.c_totalTime}}{{/minToHrAndRoundToTwoDecimals}}h</li>
                                         {{/if}}
                                     </ul>
                                 </div>
@@ -57,7 +57,7 @@
                         </div>
                         <div class="recipe-detail-body">
                             <div class="rating-box">
-                                {{#if data.c_ratingNum}}
+                                {{#if recipeData.c_ratingNum}}
                                 <div class="star-rating">
                                     <div class="back-stars">
                                         <i class="fa fa-star" aria-hidden="true"></i>
@@ -67,7 +67,7 @@
                                         <i class="fa fa-star" aria-hidden="true"></i>
 
                                         <div class="front-stars"
-                                            style="width: {{#getRatingPercentage data.c_ratingNum}}{{/getRatingPercentage}}%">
+                                            style="width: {{#getRatingPercentage recipeData.c_ratingNum}}{{/getRatingPercentage}}%">
                                             <i class="fa fa-star" aria-hidden="true"></i>
                                             <i class="fa fa-star" aria-hidden="true"></i>
                                             <i class="fa fa-star" aria-hidden="true"></i>
@@ -75,25 +75,25 @@
                                             <i class="fa fa-star" aria-hidden="true"></i>
                                         </div>
                                     </div>
-                                    <span class="rating-figure">({{data.c_ratingNum}}/ 5)</span>
+                                    <span class="rating-figure">({{recipeData.c_ratingNum}}/ 5)</span>
                                 </div>
                                 {{/if}}
                             </div>
                             <ul class="pre-tags">
-                                {{#if data.c_cuisine}} <li><span>Cuisine : </span>{{data.c_cuisine}}</li>{{/if}}
-                                {{#if data.c_course}} <li><span>Course : </span>{{data.c_course}}</li>{{/if}}
+                                {{#if recipeData.c_cuisine}} <li><span>Cuisine : </span>{{recipeData.c_cuisine}}</li>{{/if}}
+                                {{#if recipeData.c_course}} <li><span>Course : </span>{{recipeData.c_course}}</li>{{/if}}
                                 <li><span>Skill Level : </span>Advanced</li>
                             </ul>
                             <div class="separator-post"></div>
                             <p>
-                                {{data.richTextDescription}}
+                                {{recipeData.richTextDescription}}
                             </p>
                             <br />
                             <div class="ingredients-checkbox">
                                 <div class="ingredients">
                                     <h3>Ingredients</h3>
                                     <ul>
-                                        {{#each data.c_totalIngredients}}
+                                        {{#each recipeData.c_totalIngredients}}
                                         <li>
                                             <label>
                                                 <input type="checkbox" />
@@ -105,14 +105,14 @@
                                 </div>
                                 <div class="nutritional">
                                     <h3>Nutritional</h3>
-                                    {{#generateNutritionTable data.c_nutrition}}
+                                    {{#generateNutritionTable recipeData.c_nutrition}}
                                     {{/generateNutritionTable}}
                                 </div>
                             </div>
                         </div>
                         <div class="recipe-steps">
                             <h3 class="lined">Step by Step method</h3>
-                            {{#each data.c_instructions}}
+                            {{#each recipeData.c_instructions}}
                             <i>Step {{#indexPlusOne @index}}{{/indexPlusOne}}: </i>
                             <div class="row">
                                 <div class="col-sm-12">
@@ -158,7 +158,7 @@
                                 <div class="col-sm-12">
                                     <div class="details-tags">
                                         <ul>
-                                            {{#each data.c_ingredients}}
+                                            {{#each recipeData.c_ingredients}}
                                             <li><a href="/recipeList/{{this}}">{{this}}</a></li>
                                             {{/each}}
                                         </ul>
@@ -184,6 +184,11 @@
                 {{/each}}
             </div>
         </div>
+        {{> postReview}}
+        {{> showReviews}}
     </div>
 </div>
+
+
+
 {{> footer}}

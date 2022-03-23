@@ -6779,3 +6779,221 @@ text-transform: capitalize;
 .listing-grid .listing .detail h4 {
   margin-bottom: 1em;
 }
+
+
+
+/* Create Star Rating Start*/
+  
+.reviewsContainer{
+  margin-top: 3%;
+  position: relative;
+  width: 400px;
+  padding: 20px 20px;
+  border: 1px solid #444;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-right: auto;
+  margin-left: auto;
+  background: white;
+}
+
+.reviewsContainer .post{
+  display: none;
+}
+.reviewsContainer .text{
+  font-size: 25px;
+  color: #666;
+  font-weight: 500;
+}
+.reviewsContainer .edit{
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  font-size: 16px;
+  color: #666;
+  font-weight: 500;
+  cursor: pointer;
+}
+.reviewsContainer .edit:hover{
+  text-decoration: underline;
+}
+.reviewsContainer .star-widget input{
+  display: none;
+}
+.reviewsContainer .star-widget label{
+  font-size: 40px;
+  color: #444;
+  padding: 10px;
+  float: right;
+  transition: all 0.2s ease;
+}
+.reviewsContainer input:not(:checked) ~ label:hover,
+.reviewsContainer input:not(:checked) ~ label:hover ~ label{
+  color: #fd4;
+}
+.reviewsContainer input:checked ~ label{
+  color: #fd4;
+}
+.reviewsContainer input#rate-5:checked ~ label{
+  color: #fe7;
+  text-shadow: 0 0 20px #952;
+}
+ 
+.reviewsContainer form{
+  display: none;
+}
+.reviewsContainer input:checked ~ form{
+  display: block;
+}
+.reviewsContainer form header{
+  width: 100%;
+  font-size: 25px;
+  color: #fe7;
+  font-weight: 500;
+  margin: 5px 0 20px 0;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+.reviewsContainer form .textarea{
+  height: 100px;
+  width: 100%;
+  overflow: hidden;
+}
+.reviewsContainer form .textarea textarea{
+  height: 100%;
+  width: 100%;
+  outline: none;
+   border: 1px solid #333;
+   padding: 10px;
+  font-size: 17px;
+  resize: none;
+}
+.reviewsContainer .textarea textarea:focus{
+  border-color: #444;
+}
+.reviewsContainer form .btn{
+  height: 45px;
+  width: 100%;
+  margin: 15px 0;
+}
+.reviewsContainer form .btn button{
+  background: white; 
+  height: 100%;
+  width: 100%;
+  border: 1px solid #444;
+  outline: none;
+   font-size: 17px;
+  font-weight: 500;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.reviewsContainer form .btn button:hover{
+  background: black;
+  color: white;
+}
+
+
+/* Reviews Data*/
+.reviewsDataContainer {
+  margin-top: 2%;
+  border: 1px solid transparent;
+  background: white;
+ display: flex;
+ padding: 1em;
+}
+.reviewSeperator{
+  padding: 2%;
+  border-bottom: 3px solid lightgrey;
+  margin-right: 5%;
+}
+
+.imgContainer {
+  width: 8%;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.userReview, .commentsMeta{
+  display: flex;
+ }
+
+.commentsMeta{
+  margin-left: 7%;
+  margin-top: 1%;
+  background: lightgrey;
+  padding: 1em;
+}
+
+.starRating, .postedOn{
+  display: inline-block;
+  color: grey;
+}
+
+.userImg{
+  width: 3em;
+  padding: 0.5em;
+  border: 1px solid black;
+  border-radius: 50%;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 2em;
+  margin-right: 12%;
+}
+
+.userReview .rating-box {
+   margin-top: 0.5em;
+  margin-bottom: 0.5em;
+   padding: 0px; 
+}
+.userReview .rating-box .rating-figure {
+  margin-left: 4px;
+  padding-top: 0px;
+  font-size: 1em;
+}
+
+.userReview .star-rating {
+   font-size: 1em; 
+}
+
+.userReview .postedOn:before { 
+  content: " • ";
+}
+
+.reviewsDataContainer i.fa.fa-star:nth-child(1){
+  margin-left: 0px;
+}
+.reviewsDataContainer .userName{
+  font-weight: bold;
+}
+.revParent{ 
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.reviewDiv, .overAllReview{
+  display: inline-block;
+}
+.reviewDiv{
+  width: 70%;
+  float: left;
+}
+
+.overAllReview{
+  margin: auto;
+  width: 30%;
+  text-align: center;
+  border: 2px solid yellowgreen;
+}
+
+.reviewSeperator:nth-last-child(1){
+  border-bottom: none;
+}
+
+.overAllReview .star-rating {
+   font-size: 2em;
+ }

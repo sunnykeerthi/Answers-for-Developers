@@ -112,6 +112,18 @@ const hbs = expbs.create({
     minToHrAndRoundToTwoDecimals: (options) => {
       return (options / 60).toFixed(2).replace(".", ":");
     },
+    getFirstLetter: (options) => {
+      return options[0];
+    },
+    retrieveAuthorNameOnly: (options) => {
+      return options.split(" (")[0];
+    },
+    averageRating: (options) => {
+      var ratingsTotal = options.reduce((sum, ratingVar) => {
+        return sum + ratingVar.rating;
+      }, 0);
+      return ratingsTotal / options.length;
+    },
   },
 });
 

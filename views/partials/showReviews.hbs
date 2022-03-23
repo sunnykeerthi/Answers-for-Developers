@@ -1,0 +1,100 @@
+<div class="reviewsDataContainer">
+    <div class="reviewDiv">
+        {{#each reviewData}}
+        <div class="reviewSeperator">
+            <div class="revParent">
+                <div class="userReview">
+                    <div class="imgContainer">
+                        <div class="userImg">{{#getFirstLetter this.authorName}}{{/getFirstLetter}}</div>
+                    </div>
+                    <div class="otherContainer">
+                        <div class="reviewMeta">
+                            <div class="userName">{{this.authorName}}</div>
+                            <div class="secondLine">
+                                <div class="starRating">
+                                    <div class="rating-box">
+                                        {{#if this.rating}}
+                                        <div class="star-rating">
+                                            <div class="back-stars">
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+
+                                                <div class="front-stars"
+                                                    style="width: {{#getRatingPercentage this.rating}}{{/getRatingPercentage}}%">
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                </div>
+                                            </div>
+                                            <span class="rating-figure">({{this.rating}}/ 5)</span>
+                                        </div>
+                                        {{/if}}
+                                    </div>
+                                </div>
+                                <div class="postedOn">Posted on {{#changeDateFormat
+                                    this.publisherDate}}{{/changeDateFormat}}</div>
+                            </div>
+
+                        </div>
+                        <div class="review">{{this.content}}</div>
+                    </div>
+                </div>
+                {{#if this.comments}}
+                {{#each this.comments}}
+                <div class="commentsMeta">
+                    <div class="imgContainer">
+                        <div class="userImg">{{#getFirstLetter this.authorName}}{{/getFirstLetter}}</div>
+                    </div>
+                    <div class="otherContainer">
+                        <div class="reviewMeta">
+                            <div class="userName">{{#retrieveAuthorNameOnly this.authorName}}{{/retrieveAuthorNameOnly}}
+                            </div>
+                            <div class="secondLine">
+                                <div class="postedOn">Replied on {{#changeDateFormat
+                                    this.publisherDate}}{{/changeDateFormat}}</div>
+                            </div>
+
+                        </div>
+                        <div class="review">{{this.content}}</div>
+                    </div>
+                </div>
+                {{/each}}
+                {{/if}}
+            </div>
+        </div>
+        {{/each}}
+    </div>
+    <div class="overAllReview">
+        <h3>Average Reviews Rating</h3>
+        <div class="starRating">
+            <div class="rating-box">
+                <div class="star-rating">
+                    <div class="back-stars">
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+
+                        <div class="front-stars"
+                            style="width: {{#getRatingPercentage (averageRating reviewData)}}{{/getRatingPercentage}}%">
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <span class="rating-figure">({{#averageRating reviewData}}{{/averageRating}}/
+                        5)</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

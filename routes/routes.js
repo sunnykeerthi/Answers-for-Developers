@@ -2,9 +2,10 @@ const { provideCore, Matcher } = require("@yext/answers-core");
 const express = require("express");
 const router = express.Router();
 const axios = require("axios");
-const API_KEY = process.env.API_KEY;
-const EXPERIENCE_KEY = process.env.EXPERIENCE_KEY;
-const APP_API_KEY = process.env.APP_API_KEY;
+const API_KEY = process.env.API_KEY ;
+const EXPERIENCE_KEY = process.env.EXPERIENCE_KEY ;
+const APP_API_KEY =
+  process.env.APP_API_KEY ;
 
 const core = provideCore({
   apiKey: API_KEY,
@@ -78,9 +79,14 @@ router.get("/recipeDetail/:recipeId", async (req, res) => {
     const streamsResponse = await axios.get(
       `https://streams-sbx.yext.com/v2/accounts/me/api/recipesandrestaurants?api_key=${APP_API_KEY}&v=20200408&id=11103893`
     );
+
+    const getReviews = await axios.get(
+      `https://api-sandbox.yext.com/v2/accounts/me/reviews?api_key=${APP_API_KEY}&v=20220101&entityId=11104927`
+    );
     res.render("recipeDetail", {
-      data: resp.data.response,
+      recipeData: resp.data.response,
       streamsData: streamsResponse.data.response.docs[0].c_availableAt,
+      reviewData: getReviews.data.response.reviews,
     });
   } catch (err) {
     console.log(err);
@@ -158,6 +164,24 @@ router.get("/search", async (req, res) => {
         data: resp.verticalResults.results,
       });
     });
+});
+
+router.post("/postReview", async (req, res) => {
+  var body = req.body;
+  var data = JSON.stringify({
+    entity: {
+      id: body.entityId,
+    },
+    authorName: body.authorName,
+    authorEmail: body.authorEmail,
+    title: body.title,
+    rating: body.rating,
+    content: body.content,
+    status: "LIVE",
+    reviewDate: `${
+      new Date().getMonth() + 1
+    }/${new Date().getDate()}/${new Date().getFullYear()}`,
+  });
 });
 
 router.post("/recipePost", async (req, res) => {
