@@ -4,20 +4,29 @@
         <div class="edit">EDIT</div>
     </div>
     <div class="star-widget">
-        <input type="radio" name="rate" id="rate-5">
+        <input type="radio" name="rate" value="5" id="rate-5">
         <label for="rate-5" class="fa fa-star"></label>
-        <input type="radio" name="rate" id="rate-4">
+        <input type="radio" name="rate" value="4" id="rate-4">
         <label for="rate-4" class="fa fa-star"></label>
-        <input type="radio" name="rate" id="rate-3">
+        <input type="radio" name="rate" value="3" id="rate-3">
         <label for="rate-3" class="fa fa-star"></label>
-        <input type="radio" name="rate" id="rate-2">
+        <input type="radio" name="rate" value="2" id="rate-2">
         <label for="rate-2" class="fa fa-star"></label>
-        <input type="radio" name="rate" id="rate-1">
+        <input type="radio" name="rate" value="1" id="rate-1">
         <label for="rate-1" class="fa fa-star"></label>
         <form action="#">
-            <header></header>
-            <div class="textarea">
-                <textarea cols="80" placeholder="Describe your experience.."></textarea>
+            <div>
+                <div class="nameContainer">
+                    <div class="name"><label for="fname">Name:</label>
+                        <input type="text" id="fname" name="fname">
+                    </div>
+                    <div class="email"><label for="fname">Email: </label>
+                        <input type="text" id="email" name="email">
+                    </div>
+                </div>
+                <label for="title">Review Title:</label>
+                <input type="text" id="title" name="title">
+                <textarea cols="80" class="textarea" placeholder="Describe your experience.."></textarea>
             </div>
             <div class="btn">
                 <button type="submit">Post</button>
@@ -25,3 +34,8 @@
         </form>
     </div>
 </div>
+
+<script>
+    //document.querySelectorAll('.star-widget input').forEach(item => {if(item.checked) console.log(item.value)})
+    //document.getElementsByClassName('textarea')[0].value
+</script>

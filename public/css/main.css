@@ -6847,6 +6847,7 @@ text-transform: capitalize;
 }
 .reviewsContainer input:checked ~ form{
   display: block;
+  margin-top: 15%;
 }
 .reviewsContainer form header{
   width: 100%;
@@ -6896,6 +6897,19 @@ text-transform: capitalize;
   color: white;
 }
 
+.nameContainer{
+  display: flex;
+  gap: 50%;
+}
+
+form input{
+  display: block !important;
+}
+form label{
+  font-size: 1em !important;
+  padding: 1em !important;
+  float: none !important;
+}
 
 /* Reviews Data*/
 .reviewsDataContainer {
