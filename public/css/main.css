@@ -6826,10 +6826,21 @@ text-transform: capitalize;
 .reviewsContainer .star-widget label{
   font-size: 40px;
   color: #444;
-  padding: 10px;
-  float: right;
+  padding: 17px;
+    float: right;
   transition: all 0.2s ease;
 }
+
+.reviewsContainer .otherData label{
+  font-size: 1em !important;
+  padding: 0em !important;
+  color: #444;
+  padding-top: 1em !important;
+  transition: all 0.2s ease;
+  padding-bottom: 0px !important;
+  float: none !important;
+}
+
 .reviewsContainer input:not(:checked) ~ label:hover,
 .reviewsContainer input:not(:checked) ~ label:hover ~ label{
   color: #fd4;
@@ -6842,14 +6853,14 @@ text-transform: capitalize;
   text-shadow: 0 0 20px #952;
 }
  
-.reviewsContainer form{
+.reviewsContainer  .otherData{
   display: none;
 }
-.reviewsContainer input:checked ~ form{
+.reviewsContainer input:checked ~ .otherData{
   display: block;
-  margin-top: 15%;
+  padding-top: 15%;
 }
-.reviewsContainer form header{
+.reviewsContainer  .otherData header{
   width: 100%;
   font-size: 25px;
   color: #fe7;
@@ -6858,12 +6869,12 @@ text-transform: capitalize;
   text-align: center;
   transition: all 0.2s ease;
 }
-.reviewsContainer form .textarea{
+.reviewsContainer .otherData .textarea{
   height: 100px;
   width: 100%;
   overflow: hidden;
 }
-.reviewsContainer form .textarea textarea{
+.reviewsContainer  .otherData .textarea textarea{
   height: 100%;
   width: 100%;
   outline: none;
@@ -6875,12 +6886,12 @@ text-transform: capitalize;
 .reviewsContainer .textarea textarea:focus{
   border-color: #444;
 }
-.reviewsContainer form .btn{
+.reviewsContainer .otherData .btn{
   height: 45px;
   width: 100%;
   margin: 15px 0;
 }
-.reviewsContainer form .btn button{
+.reviewsContainer  .otherData .btn button{
   background: white; 
   height: 100%;
   width: 100%;
@@ -6892,25 +6903,27 @@ text-transform: capitalize;
   cursor: pointer;
   transition: all 0.3s ease;
 }
-.reviewsContainer form .btn button:hover{
+.reviewsContainer  .otherData .btn button:hover{
   background: black;
   color: white;
 }
 
 .nameContainer{
   display: flex;
-  gap: 50%;
+  gap: 35px;
 }
 
-form input{
+.otherData input{
   display: block !important;
-}
-form label{
-  font-size: 1em !important;
-  padding: 1em !important;
-  float: none !important;
+} 
+
+#title{
+  width: 100%; 
 }
 
+.error{
+  color: red;
+}
 /* Reviews Data*/
 .reviewsDataContainer {
   margin-top: 2%;

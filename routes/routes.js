@@ -2,10 +2,9 @@ const { provideCore, Matcher } = require("@yext/answers-core");
 const express = require("express");
 const router = express.Router();
 const axios = require("axios");
-const API_KEY = process.env.API_KEY ;
-const EXPERIENCE_KEY = process.env.EXPERIENCE_KEY ;
-const APP_API_KEY =
-  process.env.APP_API_KEY ;
+const API_KEY = process.env.API_KEY;
+const EXPERIENCE_KEY = process.env.EXPERIENCE_KEY;
+const APP_API_KEY = process.env.APP_API_KEY;
 
 const core = provideCore({
   apiKey: API_KEY,
@@ -170,18 +169,35 @@ router.post("/postReview", async (req, res) => {
   var body = req.body;
   var data = JSON.stringify({
     entity: {
-      id: body.entityId,
+      id: "11104927",
     },
-    authorName: body.authorName,
-    authorEmail: body.authorEmail,
+    authorName: body.fname,
+    authorEmail: body.email,
     title: body.title,
-    rating: body.rating,
-    content: body.content,
+    rating: parseInt(body.rate),
+    content: body.textarea,
     status: "LIVE",
-    reviewDate: `${
-      new Date().getMonth() + 1
-    }/${new Date().getDate()}/${new Date().getFullYear()}`,
+    reviewDate: `${new Date().getFullYear()}-${
+      (m = new Date().getMonth() + 1) < 10 ? `0${m}` : `${m}`
+    }-${new Date().getDate()}`,
   });
+
+  console.log(data);
+  var config = {
+    method: "post",
+    url: `https://liveapi-sandbox.yext.com/v2/accounts/me/reviewSubmission?api_key=${APP_API_KEY}&v=20220104`,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    data: data,
+  };
+  console.log(config);
+  try {
+    var resData = await axios(config);
+    console.log(JSON.stringify(resData));
+  } catch (err) {
+    console.log(err.response);
+  }
 });
 
 router.post("/recipePost", async (req, res) => {
