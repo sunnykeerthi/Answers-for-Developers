@@ -167,6 +167,7 @@ router.get("/search", async (req, res) => {
 
 router.post("/postReview", async (req, res) => {
   var body = req.body;
+  console.log(body.name);
   var data = JSON.stringify({
     entity: {
       id: "11104927",
@@ -181,8 +182,6 @@ router.post("/postReview", async (req, res) => {
       (m = new Date().getMonth() + 1) < 10 ? `0${m}` : `${m}`
     }-${new Date().getDate()}`,
   });
-
-  console.log(data);
   var config = {
     method: "post",
     url: `https://liveapi-sandbox.yext.com/v2/accounts/me/reviewSubmission?api_key=${APP_API_KEY}&v=20220104`,
@@ -191,12 +190,16 @@ router.post("/postReview", async (req, res) => {
     },
     data: data,
   };
-  console.log(config);
   try {
     var resData = await axios(config);
-    console.log(JSON.stringify(resData));
-  } catch (err) {
-    console.log(err.response);
+    console.log("Success");
+    res.json({ success: "resData" });
+  } catch (error) {
+    if (error.response) {
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.response.headers);
+    }
   }
 });
 

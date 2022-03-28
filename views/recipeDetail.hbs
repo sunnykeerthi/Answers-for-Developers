@@ -9,8 +9,8 @@
     </div>
 </div>
 
-<div class="recipes-home-body inner-page">
-    <div class="container">
+<div class="recipes-home-body inner-page" id="recipes-home-body">
+    <div class="container" id="container">
         <div class="row">
             <div class="col-md-12 col-lg-12">
                 <div class="recipe-set ">
@@ -43,7 +43,8 @@
 
                                     <ul class="recipe-specs-2">
                                         <li><span>Servings : </span>{{recipeData.c_serves}}</li>
-                                        {{#if recipeData.c_prepTime}} <li><span>Prep Time : </span>{{recipeData.c_prepTime}}m</li>
+                                        {{#if recipeData.c_prepTime}} <li><span>Prep Time :
+                                            </span>{{recipeData.c_prepTime}}m</li>
                                         <li><span>Cook Time : </span>{{#getCookTime recipeData.c_prepTime
                                             recipeData.c_totalTime}}{{/getCookTime}}m
                                         </li>
@@ -80,8 +81,10 @@
                                 {{/if}}
                             </div>
                             <ul class="pre-tags">
-                                {{#if recipeData.c_cuisine}} <li><span>Cuisine : </span>{{recipeData.c_cuisine}}</li>{{/if}}
-                                {{#if recipeData.c_course}} <li><span>Course : </span>{{recipeData.c_course}}</li>{{/if}}
+                                {{#if recipeData.c_cuisine}} <li><span>Cuisine : </span>{{recipeData.c_cuisine}}</li>
+                                {{/if}}
+                                {{#if recipeData.c_course}} <li><span>Course : </span>{{recipeData.c_course}}</li>
+                                {{/if}}
                                 <li><span>Skill Level : </span>Advanced</li>
                             </ul>
                             <div class="separator-post"></div>
@@ -184,7 +187,7 @@
                 {{/each}}
             </div>
         </div>
-        {{> postReview}}
+        {{!-- {{> postReview}} --}}
         {{> showReviews}}
     </div>
 </div>

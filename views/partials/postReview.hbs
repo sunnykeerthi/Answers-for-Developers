@@ -1,10 +1,10 @@
-<div class="reviewsContainer">
+<div class="reviewsContainer" id="reviewsContainer">
     <div class="post">
         <div class="text">Thanks for rating us!</div>
         <div class="edit">EDIT</div>
     </div>
     <div class="star-widget">
-        <form action="/postReview" id="reviewDetails" method="POST">
+        <form id="form" action="/postReview" id="reviewDetails" method="POST">
             <input type="radio" name="rate" value="5" id="rate-5">
             <label for="rate-5" class="fa fa-star"></label>
             <input type="radio" name="rate" value="4" id="rate-4">
@@ -19,18 +19,18 @@
                 <div>
                     <div class="nameContainer">
                         <div class="name"><label for="fname">Name:</label>
-                            <input type="name" id="fname" name="fname">
+                            <input type="name" id="name" name="fname">
                         </div>
-                        <div class="email"><label for="fname">Email: </label>
+                        <div class="email"><label for="email">Email: </label>
                             <input type="email" id="email" name="email">
                         </div>
                     </div>
                     <label for="title">Review Title:</label>
                     <input type="text" id="title" name="title">
                     <label for="entityId" hidden>EntityId:</label>
-                    <input type="hidden" id="entityId" name="entityId" value="{{recipeData.meta.id}}" >
+                    <input type="hidden" id="entityId" name="entityId" value="{{recipeData.meta.id}}">
                     <label for="textarea">Description</label>
-                    <textarea cols="80" class="textarea" name="textarea"
+                    <textarea cols="80" class="textarea" name="textarea" id="textarea"
                         placeholder="Describe your experience.."></textarea>
                 </div>
                 <div class="btn">
@@ -40,28 +40,62 @@
         </form>
     </div>
 </div>
-<script>
-    $(function () {
-        $("form").validate({
-            rules: {
-                name: "required",
-                email: {
-                    required: true,
-                    email: true
-                },
-                title: "required",
-                textarea: "required",
+<script src="/js/jquery-1.11.3.min.js"></script>
 
-            },
-            messages: {
-                name: "Please enter your Name",
-                email: "Please enter a valid email address",
-                title: "Please enter a title",
-                textarea: " Please enter a review"
-            },
-            submitHandler: function (form) {
-                form.submit();
-            }
-        });
-    });
+<script>
+
+    var mainForm = document.querySelector('#form');
+    mainForm.addEventListener("submit", handleFormSubmit);
+
+    async function handleFormSubmit(event) {
+        event.preventDefault();
+        const form = event.currentTarget;
+        const url = form.action;
+        try {
+            const formData = new FormData(form);
+            const data = JSON.stringify(Object.fromEntries(formData));
+
+            const config = {
+                method: 'POST', // or 'PUT'
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: data,
+            };
+
+            const rawResponse = await fetch(url, config);
+            const content = await rawResponse.json();
+            if (content)
+                $('#reviewsContainer').load(location.href + ' #reviewsContainer')
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
 </script>
+
+
+{{!--
+$(function () {
+$("form").validate({
+rules: {
+name: "required",
+email: {
+required: true,
+email: true
+},
+title: "required",
+textarea: "required",
+
+},
+messages: {
+name: "Please enter your Name",
+email: "Please enter a valid email address",
+title: "Please enter a title",
+textarea: " Please enter a review"
+},
+submitHandler: function (form) {
+form.submit();
+}
+});
+}); --}}

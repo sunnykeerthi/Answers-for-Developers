@@ -1,100 +1,176 @@
-<div class="reviewsDataContainer">
-    <div class="reviewDiv">
-        {{#each reviewData}}
-        <div class="reviewSeperator">
-            <div class="revParent">
-                <div class="userReview">
-                    <div class="imgContainer">
-                        <div class="userImg">{{#getFirstLetter this.authorName}}{{/getFirstLetter}}</div>
-                    </div>
-                    <div class="otherContainer">
-                        <div class="reviewMeta">
-                            <div class="userName">{{this.authorName}}</div>
-                            <div class="secondLine">
-                                <div class="starRating">
-                                    <div class="rating-box">
-                                        {{#if this.rating}}
-                                        <div class="star-rating">
-                                            <div class="back-stars">
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-
-                                                <div class="front-stars"
-                                                    style="width: {{#getRatingPercentage this.rating}}{{/getRatingPercentage}}%">
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                </div>
-                                            </div>
-                                            <span class="rating-figure">({{this.rating}}/ 5)</span>
-                                        </div>
-                                        {{/if}}
-                                    </div>
-                                </div>
-                                <div class="postedOn">Posted on {{#changeDateFormat
-                                    this.publisherDate}}{{/changeDateFormat}}</div>
-                            </div>
-
-                        </div>
-                        <div class="review">{{this.content}}</div>
-                    </div>
-                </div>
-                {{#if this.comments}}
-                {{#each this.comments}}
-                <div class="commentsMeta">
-                    <div class="imgContainer">
-                        <div class="userImg">{{#getFirstLetter this.authorName}}{{/getFirstLetter}}</div>
-                    </div>
-                    <div class="otherContainer">
-                        <div class="reviewMeta">
-                            <div class="userName">{{#retrieveAuthorNameOnly this.authorName}}{{/retrieveAuthorNameOnly}}
-                            </div>
-                            <div class="secondLine">
-                                <div class="postedOn">Replied on {{#changeDateFormat
-                                    this.publisherDate}}{{/changeDateFormat}}</div>
-                            </div>
-
-                        </div>
-                        <div class="review">{{this.content}}</div>
-                    </div>
-                </div>
-                {{/each}}
-                {{/if}}
-            </div>
+<div id="reviewsWrapper">
+    <div class="reviewsContainer" id="reviewsContainer">
+        <div class="post">
+            <div class="text">Thanks for rating us!</div>
+            <div class="edit">EDIT</div>
         </div>
-        {{/each}}
+        <div class="star-widget">
+            <form id="form" action="/postReview" id="reviewDetails" method="POST">
+                <input type="radio" name="rate" value="5" id="rate-5">
+                <label for="rate-5" class="fa fa-star"></label>
+                <input type="radio" name="rate" value="4" id="rate-4">
+                <label for="rate-4" class="fa fa-star"></label>
+                <input type="radio" name="rate" value="3" id="rate-3">
+                <label for="rate-3" class="fa fa-star"></label>
+                <input type="radio" name="rate" value="2" id="rate-2">
+                <label for="rate-2" class="fa fa-star"></label>
+                <input type="radio" name="rate" value="1" id="rate-1">
+                <label for="rate-1" class="fa fa-star"></label>
+                <div class="otherData">
+                    <div>
+                        <div class="nameContainer">
+                            <div class="name"><label for="fname">Name:</label>
+                                <input type="name" id="name" name="fname">
+                            </div>
+                            <div class="email"><label for="email">Email: </label>
+                                <input type="email" id="email" name="email">
+                            </div>
+                        </div>
+                        <label for="title">Review Title:</label>
+                        <input type="text" id="title" name="title">
+                        <label for="entityId" hidden>EntityId:</label>
+                        <input type="hidden" id="entityId" name="entityId" value="{{recipeData.meta.id}}">
+                        <label for="textarea">Description</label>
+                        <textarea cols="80" class="textarea" name="textarea" id="textarea"
+                            placeholder="Describe your experience.."></textarea>
+                    </div>
+                    <div class="btn">
+                        <button type="submit">Post</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
-    <div class="overAllReview">
-        <h3>Average Reviews Rating</h3>
-        <div class="starRating">
-            <div class="rating-box">
-                <div class="star-rating">
-                    <div class="back-stars">
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
+    <div class="reviewsDataContainer" id="reviewsDataContainer">
+        <div class="reviewDiv">
+            {{#each reviewData}}
+            <div class="reviewSeperator">
+                <div class="revParent">
+                    <div class="userReview">
+                        <div class="imgContainer">
+                            <div class="userImg">{{#getFirstLetter this.authorName}}{{/getFirstLetter}}</div>
+                        </div>
+                        <div class="otherContainer">
+                            <div class="reviewMeta">
+                                <div class="userName">{{this.authorName}}</div>
+                                <div class="secondLine">
+                                    <div class="starRating">
+                                        <div class="rating-box">
+                                            {{#if this.rating}}
+                                            <div class="star-rating">
+                                                <div class="back-stars">
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
 
-                        <div class="front-stars"
-                            style="width: {{#getRatingPercentage (averageRating reviewData)}}{{/getRatingPercentage}}%">
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <div class="front-stars"
+                                                        style="width: {{#getRatingPercentage this.rating}}{{/getRatingPercentage}}%">
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                    </div>
+                                                </div>
+                                                <span class="rating-figure">({{this.rating}}/ 5)</span>
+                                            </div>
+                                            {{/if}}
+                                        </div>
+                                    </div>
+                                    <div class="postedOn">Posted on {{#changeDateFormat
+                                        this.publisherDate}}{{/changeDateFormat}}</div>
+                                </div>
+
+                            </div>
+                            <div class="review">{{this.content}}</div>
                         </div>
                     </div>
-                    <span class="rating-figure">({{#averageRating reviewData}}{{/averageRating}}/
-                        5)</span>
+                    {{#if this.comments}}
+                    {{#each this.comments}}
+                    <div class="commentsMeta">
+                        <div class="imgContainer">
+                            <div class="userImg">{{#getFirstLetter this.authorName}}{{/getFirstLetter}}</div>
+                        </div>
+                        <div class="otherContainer">
+                            <div class="reviewMeta">
+                                <div class="userName">{{#retrieveAuthorNameOnly
+                                    this.authorName}}{{/retrieveAuthorNameOnly}}
+                                </div>
+                                <div class="secondLine">
+                                    <div class="postedOn">Replied on {{#changeDateFormat
+                                        this.publisherDate}}{{/changeDateFormat}}</div>
+                                </div>
+
+                            </div>
+                            <div class="review">{{this.content}}</div>
+                        </div>
+                    </div>
+                    {{/each}}
+                    {{/if}}
                 </div>
             </div>
+            {{/each}}
         </div>
+        <div class="overAllReview">
+            <h3>Average Reviews Rating</h3>
+            <div class="starRating">
+                <div class="rating-box">
+                    <div class="star-rating">
+                        <div class="back-stars">
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
 
+                            <div class="front-stars"
+                                style="width: {{#getRatingPercentage (averageRating reviewData)}}{{/getRatingPercentage}}%">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <span class="rating-figure">({{#averageRating reviewData}}{{/averageRating}}/
+                            5)</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
 </div>
+
+<script>
+    var mainForm = document.querySelector('#form');
+    mainForm.addEventListener("submit", handleFormSubmit);
+
+    async function handleFormSubmit(event) {
+        event.preventDefault();
+        const form = event.currentTarget;
+        const url = form.action;
+        try {
+            const formData = new FormData(form);
+            const data = JSON.stringify(Object.fromEntries(formData));
+
+            const config = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: data,
+            };
+
+            const rawResponse = await fetch(url, config);
+            const content = await rawResponse.json();
+            if (content)
+                $('#reviewsWrapper').load(location.href + ' #reviewsWrapper>*')
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+</script>
