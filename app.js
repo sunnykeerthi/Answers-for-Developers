@@ -1,10 +1,14 @@
+const { Socket } = require("dgram");
 const express = require("express");
 const app = express();
 const expbs = require("express-handlebars");
 const { options } = require("./routes/routes.js");
 const port = process.env.PORT || 3500;
 const routes = require("./routes/routes.js");
-var numToDigits = {
+const server = require("http").createServer(app);
+const io = require("socket.io")(server);
+
+const numToDigits = {
   zero: 0,
   one: 1,
   two: 2,
@@ -149,6 +153,14 @@ app.set("view engine", ".hbs");
 
 app.use(routes);
 
-app.listen(port, () => {
+io.on("connection", (socket) => {
+  console.log("Connected");
+  app.post("/reviews", (req, res) => {
+    console.log("iii");
+    socket.emit("message", Math.random());
+  });
+});
+
+server.listen(port, () => {
   console.log(`Server is running on ${port}`);
 });

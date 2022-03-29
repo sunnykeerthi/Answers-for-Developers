@@ -143,7 +143,6 @@
         </div>
     </div>
 </div>
-
 <script>
     var mainForm = document.querySelector('#form');
     mainForm.addEventListener("submit", handleFormSubmit);
@@ -172,5 +171,12 @@
             console.error(error);
         }
     }
-
+</script>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    const socket = io();
+    socket.on('message', (msg) => {
+        console.log('I the call');
+        $('#reviewsWrapper').load(location.href + ' #reviewsWrapper>*')
+    });
 </script>
