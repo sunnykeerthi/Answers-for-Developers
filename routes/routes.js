@@ -2,9 +2,10 @@ const { provideCore, Matcher } = require("@yext/answers-core");
 const express = require("express");
 const router = express.Router();
 const axios = require("axios");
-const API_KEY = process.env.API_KEY;
-const EXPERIENCE_KEY = process.env.EXPERIENCE_KEY;
-const APP_API_KEY = process.env.APP_API_KEY;
+const API_KEY = process.env.API_KEY  ;
+const EXPERIENCE_KEY = process.env.EXPERIENCE_KEY ;
+const APP_API_KEY =
+  process.env.APP_API_KEY  ;
 const bodyParser = require("body-parser");
 
 router.use(bodyParser.urlencoded({ extended: false }));
@@ -241,6 +242,11 @@ router.post("/recipePost", async (req, res) => {
   } catch (err) {
     console.log(err);
   }
+});
+
+router.post("/reviews", (req, res) => {
+  console.log("onmn");
+  req.io.emit("message", "newReview");
 });
 
 createArrayFromString = (data) => {

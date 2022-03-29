@@ -162,7 +162,6 @@
                 },
                 body: data,
             };
-
             const rawResponse = await fetch(url, config);
             const content = await rawResponse.json();
             if (content)
@@ -171,12 +170,4 @@
             console.error(error);
         }
     }
-</script>
-<script src="/socket.io/socket.io.js"></script>
-<script>
-    const socket = io();
-    socket.on('message', (msg) => {
-        console.log('I the call');
-        $('#reviewsWrapper').load(location.href + ' #reviewsWrapper>*')
-    });
 </script>

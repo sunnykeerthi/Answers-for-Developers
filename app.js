@@ -5,8 +5,17 @@ const expbs = require("express-handlebars");
 const { options } = require("./routes/routes.js");
 const port = process.env.PORT || 3500;
 const routes = require("./routes/routes.js");
-const server = require("http").createServer(app);
-const io = require("socket.io")(server);
+
+const { createServer } = require("http"); // you can use https as well
+const socketIo = require("socket.io");
+
+const server = createServer(app);
+const io = socketIo(server, { cors: { origin: "*" } }); // you can change the cors to your own domain
+
+app.use((req, res, next) => {
+  req.io = io;
+  return next();
+});
 
 const numToDigits = {
   zero: 0,
@@ -152,14 +161,6 @@ app.engine(".hbs", hbs.engine);
 app.set("view engine", ".hbs");
 
 app.use(routes);
-
-io.on("connection", (socket) => {
-  console.log("Connected");
-  app.post("/reviews", (req, res) => {
-    console.log("iii");
-    socket.emit("message", Math.random());
-  });
-});
 
 server.listen(port, () => {
   console.log(`Server is running on ${port}`);
