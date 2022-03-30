@@ -164,8 +164,11 @@
             };
             const rawResponse = await fetch(url, config);
             const content = await rawResponse.json();
-            if (content)
+            if (content) {
+                console.log('In the div')
                 $('#reviewsWrapper').load(location.href + ' #reviewsWrapper>*')
+            }
+
         } catch (error) {
             console.error(error);
         }
