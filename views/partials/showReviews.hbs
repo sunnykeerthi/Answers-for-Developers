@@ -166,7 +166,7 @@
             const content = await rawResponse.json();
             if (content) {
                 console.log('In the div')
-                $('#reviewsWrapper').load(location.href + ' #reviewsWrapper>*')
+                $('#reviewsWrapper').load(window.location.href + ' #reviewsWrapper>*')
             }
 
         } catch (error) {

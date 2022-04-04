@@ -2,10 +2,12 @@ const { provideCore, Matcher } = require("@yext/answers-core");
 const express = require("express");
 const router = express.Router();
 const axios = require("axios");
-const API_KEY = process.env.API_KEY  ;
-const EXPERIENCE_KEY = process.env.EXPERIENCE_KEY ;
-const APP_API_KEY =
-  process.env.APP_API_KEY  ;
+const dotenv = require("dotenv");
+dotenv.config();
+
+const API_KEY = process.env.API_KEY;
+const EXPERIENCE_KEY = process.env.EXPERIENCE_KEY;
+const APP_API_KEY = process.env.APP_API_KEY;
 const bodyParser = require("body-parser");
 
 router.use(bodyParser.urlencoded({ extended: false }));
@@ -184,7 +186,7 @@ router.post("/postReview", async (req, res) => {
     status: "LIVE",
     reviewDate: `${new Date().getFullYear()}-${
       (m = new Date().getMonth() + 1) < 10 ? `0${m}` : `${m}`
-    }-${new Date().getDate()}`,
+    }-${(n = new Date().getDate()) < 10 ? `0${n}` : `${n}`}`,
   });
   var config = {
     method: "post",
@@ -194,14 +196,15 @@ router.post("/postReview", async (req, res) => {
     },
     data: data,
   };
+  console.log(config);
   try {
     var resData = await axios(config);
     res.json({ success: "resData" });
   } catch (error) {
     if (error.response) {
-      console.log(error.response.data);
-      console.log(error.response.status);
-      console.log(error.response.headers);
+      console.log(
+        JSON.stringify(error.meta.forEach((item) => console.log(item.message)))
+      );
     }
   }
 });
