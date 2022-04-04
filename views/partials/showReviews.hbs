@@ -165,10 +165,11 @@
             const rawResponse = await fetch(url, config);
             const content = await rawResponse.json();
             if (content) {
-                setTimeout(() => { $('#reviewsWrapper').load(location.href + ' #reviewsWrapper>*') }, 1000);
+                setTimeout(() => { $('#reviewsWrapper').load(location.href + ' #reviewsWrapper>*'); return false; }, 1000);
             }
         } catch (error) {
             console.error(error);
         }
+
     }
 </script>
