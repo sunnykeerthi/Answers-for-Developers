@@ -173,8 +173,7 @@ router.get("/search", async (req, res) => {
 
 router.post("/postReview", async (req, res) => {
   var body = req.body;
-  console.log(body.name);
-  var data = JSON.stringify({
+   var data = JSON.stringify({
     entity: {
       id: "11104927",
     },
@@ -196,15 +195,14 @@ router.post("/postReview", async (req, res) => {
     },
     data: data,
   };
-  console.log(config);
-  try {
+   try {
     var resData = await axios(config);
     res.json({ success: "resData" });
   } catch (error) {
     if (error.response) {
-      console.log(
-        JSON.stringify(error.meta.forEach((item) => console.log(item.message)))
-      );
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.response.headers);
     }
   }
 });
