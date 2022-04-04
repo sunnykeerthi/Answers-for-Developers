@@ -168,7 +168,7 @@
                 console.log('In the div');
                 setTimeout()
 
-                setTimeout(function () { $('#reviewsWrapper').load(location.href + ' #reviewsWrapper>*') }, 5000);
+                setTimeout(function () { console.log('refresh'), $('#reviewsWrapper').load(location.href + ' #reviewsWrapper>*') }, 5000);
             }
 
         } catch (error) {
