@@ -166,11 +166,8 @@
             const content = await rawResponse.json();
             if (content) {
                 console.log('In the div');
-                setTimeout()
-
-                setTimeout(function () { console.log('refresh'), $('#reviewsWrapper').load(location.href + ' #reviewsWrapper>*') }, 5000);
+                setTimeout(() => { console.log("this is the first message"), $('#reviewsWrapper').load(location.href + ' #reviewsWrapper>*') }, 5000);
             }
-
         } catch (error) {
             console.error(error);
         }
