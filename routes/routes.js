@@ -173,7 +173,7 @@ router.get("/search", async (req, res) => {
 
 router.post("/postReview", async (req, res) => {
   var body = req.body;
-   var data = JSON.stringify({
+  var data = JSON.stringify({
     entity: {
       id: "11104927",
     },
@@ -195,7 +195,7 @@ router.post("/postReview", async (req, res) => {
     },
     data: data,
   };
-   try {
+  try {
     var resData = await axios(config);
     res.json({ success: "resData" });
   } catch (error) {
