@@ -135,7 +135,7 @@ const hbs = expbs.create({
       var ratingsTotal = options.reduce((sum, ratingVar) => {
         return sum + ratingVar.rating;
       }, 0);
-      return ratingsTotal / options.length;
+      return parseFloat(ratingsTotal / options.length).toFixed(2);
     },
   },
 });
