@@ -7024,3 +7024,23 @@ text-transform: capitalize;
 .overAllReview .star-rating {
    font-size: 2em;
  }
+
+
+ #overlay {
+  width: auto;
+  position: relative;
+  padding: 2em;
+  margin: 2em; 
+  background: white;
+  text-align: center;
+}
+
+#overlay img.loading_circle {
+  width: 5%; 
+  margin-left: 2%;
+}
+
+#locationsCarousel .slick-next::before,
+#locationsCarousel .slick-prev::before {
+  color: green !important;
+}

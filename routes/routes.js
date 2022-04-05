@@ -177,7 +177,7 @@ router.post("/postReview", async (req, res) => {
     entity: {
       id: "11104927",
     },
-    authorName: body.fname,
+    authorName: body.name,
     authorEmail: body.email,
     title: body.title,
     rating: parseInt(body.rate),
@@ -200,9 +200,7 @@ router.post("/postReview", async (req, res) => {
     res.json({ success: "resData" });
   } catch (error) {
     if (error.response) {
-      console.log(error.response.data);
-      console.log(error.response.status);
-      console.log(error.response.headers);
+      console.log(error.response.data.meta.errors);
     }
   }
 });
