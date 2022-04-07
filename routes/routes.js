@@ -244,6 +244,7 @@ router.post("/recipePost", async (req, res) => {
 });
 
 router.post("/reviews", (req, res) => {
+  console.log("New test");
   req.io.emit("message", "newReview");
 });
 
