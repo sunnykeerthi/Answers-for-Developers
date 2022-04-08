@@ -204,6 +204,34 @@ router.post("/postReview", async (req, res) => {
     }
   }
 });
+router.post("/postQnA", async (req, res) => {
+  var body = req.body;
+  var data = JSON.stringify({
+    entity: {
+      id: "11104927",
+    },
+    name: body.name,
+    email: body.email,
+    questionText: body.questionText,
+    questionLanguage: "en",
+  });
+  var config = {
+    method: "post",
+    url: `https://liveapi-sandbox.yext.com/v2/accounts/me/createQuestion?api_key=${APP_API_KEY}&v=20220104`,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    data: data,
+  };
+  try {
+    var resData = await axios(config);
+    res.json({ success: "resData" });
+  } catch (error) {
+    if (error.response) {
+      console.log(error.response.data.meta.errors);
+    }
+  }
+});
 
 router.post("/recipePost", async (req, res) => {
   var body = req.body;
@@ -244,7 +272,7 @@ router.post("/recipePost", async (req, res) => {
 });
 
 router.post("/reviews", (req, res) => {
-   req.io.emit("message", "newReview");
+  req.io.emit("message", "newReview");
 });
 
 createArrayFromString = (data) => {
