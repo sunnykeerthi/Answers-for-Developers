@@ -6785,10 +6785,9 @@ text-transform: capitalize;
 /* Create Star Rating Start*/
   
 .reviewsContainer{
-  margin-top: 3%;
-  position: relative;
+   position: relative;
   width: 400px;
-  padding: 20px 20px;
+  padding: 0px 20px;
   border: 1px solid #444;
   border-radius: 5px;
   display: flex;
@@ -6798,6 +6797,7 @@ text-transform: capitalize;
   margin-right: auto;
   margin-left: auto;
   background: white;
+  margin-top: 6%;
 }
 
 .reviewsContainer .post{
@@ -6926,11 +6926,12 @@ text-transform: capitalize;
 }
 /* Reviews Data*/
 .reviewsDataContainer {
-  margin-top: 2%;
-  border: 1px solid transparent;
+   border: 1px solid transparent;
   background: white;
  display: flex;
  padding: 1em;
+ height: 350px;
+ overflow: scroll;
 }
 .reviewSeperator{
   padding: 2%;
@@ -7043,4 +7044,57 @@ text-transform: capitalize;
 #locationsCarousel .slick-next::before,
 #locationsCarousel .slick-prev::before {
   color: green !important;
+} 
+
+#othersSection {
+  background-color: white;  
+  margin-top: 2em;
+}
+
+#qnaform .otherData{
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  padding:2em;
+}
+#QnA .nameContainer {
+  display: -webkit-inline-box;
+  gap: 5em;
+}
+#QnA{
+  padding-top: 3em !important;
+}
+
+#qnaform .nameContainer .name, 
+#qnaform .nameContainer .email{
+  width: 50%;
+}
+#qnaname, #qnaemail{
+  width: 100%;
+}
+/* Tabs */
+/* Style tab links */
+
+.tablink {
+  background-color: white;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  width: 50%;
+  border: 1px solid yellowgreen;
+  font-weight: bold;
+  font-size: 1.3em;
+}
+
+.tablink:hover {
+  background-color: #777;
+}
+
+/* Style the tab content (and add height:100% for full page content) */
+.tabcontent { 
+  display: none;
+  padding: 20px 20px;
+  height: 100%;
 }

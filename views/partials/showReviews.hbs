@@ -71,7 +71,7 @@
                                                         <i class="fa fa-star" aria-hidden="true"></i>
                                                     </div>
                                                 </div>
-                                                <span class="rating-figure">({{this.rating}}/ 5)</span>
+                                                <span class="rating-figure">({{this.rating}}/5)</span>
                                             </div>
                                             {{/if}}
                                         </div>
@@ -131,8 +131,7 @@
                                 <i class="fa fa-star" aria-hidden="true"></i>
                             </div>
                         </div>
-                        <span class="rating-figure">({{#averageRating reviewData}}{{/averageRating}}/
-                            5)</span>
+                        <span class="rating-figure">({{#averageRating reviewData}}{{/averageRating}}/5)</span>
                     </div>
                 </div>
             </div>
@@ -180,7 +179,7 @@
 <script src="/socket.io/socket.io.js"></script>
 <script>
     var socket = io();
-    socket.on('message', function (msg) {
+    socket.on('newReview', function (msg) {
         $('#reviewsWrapper').load(location.href + ' #reviewsWrapper>*');
     });
 </script>

@@ -1,0 +1,120 @@
+<div id="qnawrapper">
+    <form id="qnaform">
+        <div class="otherData">
+            <div>
+                <div class="nameContainer">
+                    <div class="name"><label for="qnaname">Name:</label>
+                        <input type="name" id="qnaname" name="qnaname">
+                    </div>
+                    <div class="email"><label for="qnaemail">Email: </label>
+                        <input type="email" id="qnaemail" name="qnaemail">
+                    </div>
+                </div>
+                <div class="qna">
+                    <label for="textarea">Question</label>
+
+                    <textarea cols="80" class="textarea" name="textarea" id="qnaquestion"
+                        placeholder="Describe your experience.."></textarea>
+                </div>
+                <label for="entityId" hidden>EntityId:</label>
+                <input type="hidden" id="entityId" name="entityId" value="{{recipeData.meta.id}}">
+            </div>
+            <div class="btn">
+                <button type="submit" class="myQlink">Post your question</button>
+            </div>
+        </div>
+    </form>
+    <div class="reviewsDataContainer" id="reviewsDataContainer">
+        {{#if qnaData}}
+        <div class="reviewDiv">
+            {{#each qnaData}}
+            <div class="reviewSeperator">
+                <div class="revParent">
+                    <div class="userReview">
+                        <div class="imgContainer">
+                            <div class="userImg">{{#getFirstLetter this.authorName}}{{/getFirstLetter}}</div>
+                        </div>
+                        <div class="otherContainer">
+                            <div class="reviewMeta">
+                                <div class="userName">{{this.authorName}}</div>
+                                <div class="secondLine">
+                                    <div class="postedOn">Posted on {{#changeDateFormat
+                                        this.createTime}}{{/changeDateFormat}}</div>
+                                </div>
+
+                            </div>
+                            <div class="review">{{this.content}}</div>
+                        </div>
+                    </div>
+                    {{#if this.answers}}
+                    {{#each this.answers}}
+                    <div class="commentsMeta">
+                        <div class="imgContainer">
+                            <div class="userImg">{{#getFirstLetter this.authorName}}{{/getFirstLetter}}</div>
+                        </div>
+                        <div class="otherContainer">
+                            <div class="reviewMeta">
+                                <div class="userName">{{#retrieveAuthorNameOnly
+                                    this.authorName}}{{/retrieveAuthorNameOnly}}
+                                </div>
+                                <div class="secondLine">
+                                    <div class="postedOn">Replied on {{#changeDateFormat
+                                        this.createTime}}{{/changeDateFormat}}</div>
+                                </div>
+
+                            </div>
+                            <div class="review">{{this.content}}</div>
+                        </div>
+                    </div>
+                    {{/each}}
+                    {{/if}}
+                </div>
+            </div>
+            {{/each}}
+        </div>
+        {{else}}
+        <p style="margin-left: auto; margin-right: auto;">Post your first Question</p>
+        {{/if}}
+    </div>
+
+</div>
+<script src="/socket.io/socket.io.js"></script>
+
+<script>
+    var socket = io();
+
+    $(document).on("click", '.myQlink', async function (event) {
+        const data = JSON.stringify({
+            name: $('#qnaname').val(),
+            email: $('#qnaemail').val(),
+            questionText: $('#qnaquestion').val(),
+        });
+        event.preventDefault();
+        $('div#qnawrapper').html('<div id="overlay">Please wait<img src="https://i.imgur.com/V6qAnhz.gif" class="loading_circle" alt="loading" /></div>');
+        var mainForm = document.querySelector('#qnaform');
+        const url = '/postQnA';
+        try {
+            const config = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: data,
+            };
+            const rawResponse = await fetch(url, config);
+            const content = await rawResponse.json();
+            if (content) {
+                setTimeout(() => {
+                    $('#qnawrapper').load(location.href + ' #qnawrapper>*');
+                }, 200);
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    });
+
+
+    socket.on('newQna', function (msg) {
+        $('#qnawrapper').load(location.href + ' #qnawrapper>*');
+    });
+</script>

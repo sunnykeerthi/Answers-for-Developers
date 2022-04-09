@@ -88,10 +88,14 @@ router.get("/recipeDetail/:recipeId", async (req, res) => {
     const getReviews = await axios.get(
       `https://api-sandbox.yext.com/v2/accounts/me/reviews?api_key=${APP_API_KEY}&v=20220101&entityId=11104927`
     );
+    const getQnA = await axios.get(
+      `https://api-sandbox.yext.com/v2/accounts/me/questions?api_key=${APP_API_KEY}&v=20220101&entityId=11104927`
+    );
     res.render("recipeDetail", {
       recipeData: resp.data.response,
       streamsData: streamsResponse.data.response.docs[0].c_availableAt,
       reviewData: getReviews.data.response.reviews,
+      qnaData: getQnA.data.response.questions,
     });
   } catch (err) {
     console.log(err);
@@ -207,13 +211,11 @@ router.post("/postReview", async (req, res) => {
 router.post("/postQnA", async (req, res) => {
   var body = req.body;
   var data = JSON.stringify({
-    entity: {
-      id: "11104927",
-    },
+    entityId: "587178198537928051",
     name: body.name,
     email: body.email,
     questionText: body.questionText,
-    questionLanguage: "en",
+    questionLanguage: "english",
   });
   var config = {
     method: "post",
@@ -271,8 +273,11 @@ router.post("/recipePost", async (req, res) => {
   }
 });
 
-router.post("/reviews", (req, res) => {
-  req.io.emit("message", "newReview");
+router.post("/reviews_webhook", (req, res) => {
+  req.io.emit("newReview", "newReview");
+});
+router.post("/qna_webhook", (req, res) => {
+  req.io.emit("newQna", "newQna");
 });
 
 createArrayFromString = (data) => {

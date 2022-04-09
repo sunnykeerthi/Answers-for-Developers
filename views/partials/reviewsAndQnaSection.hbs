@@ -1,0 +1,29 @@
+<div id="othersSection">
+    <button class="tablink" onclick="openPage('Reviews', this, 'yellowgreen')" id="defaultOpen">Reviews</button>
+    <button class="tablink" onclick="openPage('QnA', this, 'yellowgreen')">Q&amp;A</button>
+
+    <div id="Reviews" class="tabcontent">
+        {{> showReviews}}
+    </div>
+
+    <div id="QnA" class="tabcontent">
+        {{> showQnA}}
+    </div>
+</div>
+<script>
+    function openPage(pageName, elmnt, color) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablink");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].style.backgroundColor = "";
+        }
+        document.getElementById(pageName).style.display = "block";
+        elmnt.style.backgroundColor = color;
+    }
+    document.getElementById("defaultOpen").click();
+
+</script>
