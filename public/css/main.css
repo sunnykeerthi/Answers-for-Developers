@@ -6930,8 +6930,12 @@ text-transform: capitalize;
   background: white;
  display: flex;
  padding: 1em;
- height: 350px;
- overflow: scroll;
+ 
+}
+
+.reviewDiv, .qnaDataContainer {
+  height: 350px;
+  overflow: scroll;
 }
 .reviewSeperator{
   padding: 2%;
@@ -7003,12 +7007,19 @@ text-transform: capitalize;
   margin-right: auto;
 }
 
-.reviewDiv, .overAllReview{
+.reviewDiv, .overAllReview, .qnADiv{
   display: inline-block;
 }
+
 .reviewDiv{
   width: 70%;
   float: left;
+}
+
+.qnADiv{
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .overAllReview{
@@ -7045,11 +7056,30 @@ text-transform: capitalize;
 #locationsCarousel .slick-prev::before {
   color: green !important;
 } 
+.slick-prev, .slick-next {
+  left: 50%;
+  transform: translate(-50%, 0) rotate(90deg);
+}
 
+.slick-next {
+  top: unset;
+  bottom: -30px;
+}
+.slick-prev {
+  top: -30px;
+}
 #othersSection {
   background-color: white;  
   margin-top: 2em;
 }
+
+.servTitle{
+  text-align: center; 
+  margin-bottom:2em !important; 
+ }
+ .servTitle:after{
+  background: none !important;
+ }
 
 #qnaform .otherData{
   width: 50%;

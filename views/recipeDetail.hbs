@@ -81,7 +81,8 @@
                                 {{/if}}
                             </div>
                             <ul class="pre-tags">
-                                {{#if recipeData.c_cuisine}} <li><span>Cuisine : </span>{{recipeData.c_cuisine}}</li>
+                                {{#if recipeData.c_cuisine}} <li><span>Cuisine : </span>{{recipeData.c_cuisine}}
+                                </li>
                                 {{/if}}
                                 {{#if recipeData.c_course}} <li><span>Course : </span>{{recipeData.c_course}}</li>
                                 {{/if}}
@@ -113,78 +114,85 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="recipe-steps">
-                            <h3 class="lined">Step by Step method</h3>
-                            {{#each recipeData.c_instructions}}
-                            <i>Step {{#indexPlusOne @index}}{{/indexPlusOne}}: </i>
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <p>
-                                        {{this}}
-                                    </p>
-                                </div>
-                            </div>
-                            {{/each}}
-                        </div>
+                        <div class="col-md-8 col-lg-8">
 
-
-                        <div class="tips-variations">
-                            <h3>Tips & variations</h3>
-                            <ul>
-                                <li>
-                                    <p>
-                                        Rinse the chicken pieces in cold water and pat dry. Place the chicken in
-                                        a large, resealable zip-top bag
-                                        and pour in the marinade. Toss the chicken inside the bag to cover.
-                                    </p>
-                                </li>
-                                <li>
-                                    <p>
-                                        Rinse the chicken pieces in cold water and pat dry. Place the chicken in
-                                        a large, resealable zip-top bag
-                                        and pour in the marinade.
-                                    </p>
-                                </li>
-                                <li>
-                                    <p>
-                                        Rinse the chicken pieces in cold water and pat dry. Place the chicken in
-                                        a large, resealable zip-top bag
-                                        and pour in the marinade. Toss the chicken inside the bag to cover.
-                                    </p>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="separator-post"></div>
-                        <div class="tags-icons">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="details-tags">
-                                        <ul>
-                                            {{#each recipeData.c_ingredients}}
-                                            <li><a href="/recipeList/{{this}}">{{this}}</a></li>
-                                            {{/each}}
-                                        </ul>
+                            <div class="recipe-steps">
+                                <h3 class="lined">Step by Step method</h3>
+                                {{#each recipeData.c_instructions}}
+                                <i>Step {{#indexPlusOne @index}}{{/indexPlusOne}}: </i>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <p>
+                                            {{this}}
+                                        </p>
                                     </div>
                                 </div>
+                                {{/each}}
+                            </div>
 
+
+                            <div class="tips-variations">
+                                <h3>Tips & variations</h3>
+                                <ul>
+                                    <li>
+                                        <p>
+                                            Rinse the chicken pieces in cold water and pat dry. Place the chicken in
+                                            a large, resealable zip-top bag
+                                            and pour in the marinade. Toss the chicken inside the bag to cover.
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p>
+                                            Rinse the chicken pieces in cold water and pat dry. Place the chicken in
+                                            a large, resealable zip-top bag
+                                            and pour in the marinade.
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p>
+                                            Rinse the chicken pieces in cold water and pat dry. Place the chicken in
+                                            a large, resealable zip-top bag
+                                            and pour in the marinade. Toss the chicken inside the bag to cover.
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="separator-post"></div>
+                            <div class="tags-icons">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="details-tags">
+                                            <ul>
+                                                {{#each recipeData.c_ingredients}}
+                                                <li><a href="/recipeList/{{this}}">{{this}}</a></li>
+                                                {{/each}}
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-lg-4">
+                            <div style="padding: 5%; background:white;">
+                                <h2 class="servTitle">
+                                    Served at</h2>
+                                <div id='locationsCarousel'>
+                                    {{#each streamsData}}
+                                    <div>
+                                        <a href="/locationDetail/{{this.id}}">
+                                            <img
+                                                src="{{#getImageFromPhotoGallery this.photoGallery}}{{/getImageFromPhotoGallery}}">
+                                        </a>
+                                        <h4>{{this.name}}</h4>
+                                    </div>
+                                    {{/each}}
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div style="margin-top: 5%; background:white;">
-            <h1 style="padding: 0.5em;">Served at</h1>
-            <div id='locationsCarousel'>
-                {{#each streamsData}}
-                <div>
-                    <a href="/locationDetail/{{this.id}}">
-                        <img src="{{#getImageFromPhotoGallery this.photoGallery}}{{/getImageFromPhotoGallery}}">
-                    </a>
-                    <h4>{{this.name}}</h4>
-                </div>
-                {{/each}}
             </div>
         </div>
         {{> reviewsAndQnaSection}}
