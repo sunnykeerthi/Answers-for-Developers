@@ -7128,3 +7128,81 @@ text-transform: capitalize;
   padding: 20px 20px;
   height: 100%;
 }
+
+/** Create a new recipe CSS*/
+.form-section, .form-section-closed {
+  list-style: none;
+  list-style-position: outside;
+  margin: 0px;
+  padding: 0px;
+  position: relative; 
+  clear: both;
+  margin-left: 50%;
+    padding: 1em;
+    background: lightgrey;
+    opacity: 0.85;
+} 
+    
+.form-all {
+  background-color: #ffffff;
+}
+
+
+
+.form-line:before, .form-line:after {
+  display: table;
+  content: '';
+  line-height: 0;
+}
+
+.form-line {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-left: 36px;
+  padding-right: 36px;
+  margin: 6px 0;
+  width: 100%;
+  box-sizing: border-box;
+ }
+
+.form-label.form-label-auto {
+  width: 200px;
+    display: block; 
+  text-align: left;
+  word-break: break-word;
+}
+
+.form-required {
+  margin-left: 5px;
+  color: red;
+}
+ 
+
+.form-textbox, .form-textarea, .form-dropdown {
+       width: 100%;
+   box-sizing: border-box;
+  padding: 4px 3px 2px 3px;
+} 
+
+
+h1.form-header {
+  font-size: 2.143em;
+  font-style: normal;
+  color: #000000;
+}
+
+.form-header-group {
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.addRecipeContainer{
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.addRecipeDiv{
+  background-image: url(https://i.imgur.com/Wz0pXYh.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+}

@@ -76,6 +76,9 @@ router.get("/", (req, res) => {
 
 router.get("/recipeDetail/:recipeId", async (req, res) => {
   let entityId = req.params.recipeId;
+  console.log(
+    `https://liveapi-sandbox.yext.com/v2/accounts/me/entities/${entityId}?api_key=${APP_API_KEY}&v=20220101`
+  );
   try {
     const resp = await axios.get(
       `https://liveapi-sandbox.yext.com/v2/accounts/me/entities/${entityId}?api_key=${APP_API_KEY}&v=20220101`
@@ -98,7 +101,7 @@ router.get("/recipeDetail/:recipeId", async (req, res) => {
       qnaData: getQnA.data.response.questions,
     });
   } catch (err) {
-    console.log(err);
+    console.log(err.response.data.meta.errors);
   }
 });
 
@@ -211,7 +214,7 @@ router.post("/postReview", async (req, res) => {
 router.post("/postQnA", async (req, res) => {
   var body = req.body;
   var data = JSON.stringify({
-    entityId: "587178198537928051",
+    entityId: "8286784854362976412",
     name: body.name,
     email: body.email,
     questionText: body.questionText,
@@ -234,8 +237,11 @@ router.post("/postQnA", async (req, res) => {
     }
   }
 });
+router.get("/submitRecipe", async (req, res) => {
+  res.render("submitRecipe", {});
+});
 
-router.post("/recipePost", async (req, res) => {
+router.post("/postRecipe", async (req, res) => {
   var body = req.body;
   var data = JSON.stringify({
     meta: {
@@ -249,18 +255,18 @@ router.post("/recipePost", async (req, res) => {
     c_images: createArrayFromString(body.images),
     c_preparationTime: body.preparationTime,
     c_serves: body.serves,
-    c_author: body.author,
+    c_aurthor: body.author,
     c_nutrition: createArrayFromString(body.nutrition),
-    c_cuisine: body.cuisine,
-    c_course: body.course,
+    c_cuisine: createArrayFromString(body.cuisine),
+    c_course: createArrayFromString(body.course),
     c_totalIngredients: createArrayFromString(body.totalIngredients),
     richTextDescription: body.description,
+    c_instructions: createArrayFromString(body.instructions),
   });
-
   var config = {
     method: "post",
     url: `https://api-sandbox.yext.com/v2/accounts/me/entities?api_key=${APP_API_KEY}&v=20220101&entityType=ce_recipes&format=html`,
-    header: {
+    headers: {
       "Content-Type": "application/json",
     },
     data: data,
@@ -268,23 +274,34 @@ router.post("/recipePost", async (req, res) => {
 
   try {
     var resData = await axios(config);
-  } catch (err) {
-    console.log(err);
+    res.json({ success: "resData" });
+  } catch (error) {
+    if (error.response) {
+      console.log(error.response.data.meta.errors);
+    }
   }
 });
 
 router.post("/reviews_webhook", (req, res) => {
   req.io.emit("newReview", "newReview");
 });
+
 router.post("/qna_webhook", (req, res) => {
   req.io.emit("newQna", "newQna");
 });
 
 createArrayFromString = (data) => {
   var retArray = [];
-  data.includes(",")
-    ? data.split(",").forEach((item) => retArray.push(item))
-    : retArray.push(data);
+  if (data.includes("\n")) {
+    data.includes("\n")
+      ? data.split("\n").forEach((item) => retArray.push(item.trim()))
+      : retArray.push(data);
+  } else {
+    data.includes(",")
+      ? data.split(",").forEach((item) => retArray.push(item.trim()))
+      : retArray.push(data);
+  }
+
   return retArray;
 };
 
